@@ -1,3 +1,145 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
 * {
-  background-color: pink;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  font-family: "Open Sans", "Arial Narrow", Arial, sans-serif;
+  font-size: 16px;
+  list-style-type: none;
+}
+
+
+body {
+  background-color: #EDEEEF;
+}
+
+/* --- General Elements */
+fieldset {
+  width: 650px;
+  position: relative;
+  padding: 8px 12px;
+  margin-top: 57px;
+  margin-bottom: 18px;
+  margin-left: auto;
+  background-color: white;
+  border: none;
+}
+
+button {
+  border-width: 2px;
+}
+
+button:hover, button:focus {
+  cursor: pointer;
+}
+
+.buttonblue {
+  width: 180px;
+  height: 40px;
+
+  font-size: 20px;
+  text-decoration: none;
+  background-color: #4717F1;
+  color: white;
+  border-color: #4717F1;
+  border-style: solid;
+}
+
+.buttongrey {
+  width: 180px;
+  height: 40px;
+
+  font-size: 20px;
+  text-decoration: none;
+  background-color: transparent;
+  color: #575757;
+  border-color: #575757;
+  border-style: solid;
+}
+
+/* --- Header --- */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 70px;
+  padding: 0 18px;
+  margin-bottom: 18px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  width: 340px;
+  
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* --- Main --- */
+main {
+  margin: auto auto;
+  width: 918px;
+}
+
+h1 {
+  color: #4717F1;
+  font-size: 34px;
+  text-transform: uppercase;
+
+  margin-bottom: 12px;
+  margin-bottom: 0px;
+}
+
+/* hide default file button, use label instead */
+input[type=file] {
+  visibility: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#formcon {
+  display: flex;
+  justify-content: space-between;
+}
+
+div fieldset {
+  margin-bottom: 0;
+}
+
+#thumbnail {
+  width: 250px;
+  height: 250px;
+}
+
+legend {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  font-size: 20px;
+}
+
+#description {
+  padding: 0;
+  background-color: transparent;
+}
+
+#description textarea {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  padding: 6px;
+  resize: none;
+}
+
+#buttoncon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#buttoncon button {
+  margin-left: 6px
 }
