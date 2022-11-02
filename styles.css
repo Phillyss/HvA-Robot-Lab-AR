@@ -8,6 +8,7 @@
   font-family: "Open Sans", "Arial Narrow", Arial, sans-serif;
   font-size: 16px;
   list-style-type: none;
+  transition: 0.3s;
 }
 
 
@@ -73,8 +74,10 @@ nav {
 nav ul {
   display: flex;
   justify-content: space-between;
-  width: 340px;
-  
+  width: 403px;
+}
+
+nav li {
   font-size: 20px;
   font-weight: bold;
 }
@@ -110,9 +113,25 @@ div fieldset {
   margin-bottom: 0;
 }
 
-#thumbnail {
+#thumbnailcon {
   width: 250px;
   height: 250px;
+  padding: 0;
+}
+
+#thumbnailcon label {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+}
+
+#thumbnailcon label:hover {
+  cursor: pointer;
+  font-size: 33px;
 }
 
 legend {
@@ -120,6 +139,13 @@ legend {
   top: -40px;
   left: 0;
   font-size: 20px;
+}
+
+label.buttonblue {
+  display: inline;
+  border: none;
+  font-size: 10px;
+  text-align: center;
 }
 
 #description {
