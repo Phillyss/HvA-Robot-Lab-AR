@@ -23,51 +23,70 @@
     <main>
       <h1>Upload model</h1>
 
-      <form action="/pages/upload.html" method="GET" enctype="multipart/form-data">
+      <form
+        action="/pages/upload.html"
+        method="GET"
+        enctype="multipart/form-data"
+      >
         <div id="formcon">
           <fieldset id="thumbnailcon">
-            <label for="thumbnail">+<br> Thumbnail</label>
+            <label for="thumbnail"
+              >+<br />
+              Thumbnail</label
+            >
             <input type="file" name="thumbnail" id="thumbnail" />
           </fieldset>
-  
+
           <fieldset>
             <legend>Information</legend>
             <div>
               <label for="model">3D Model:</label>
               <label for="model" class="buttonblue">Choose File</label>
-              <input type="file" name="model" id="model" placeholder="Thumbnail">
+              <input
+                type="file"
+                name="model"
+                id="model"
+                placeholder="Thumbnail"
+              />
             </div>
             <div>
               <label for="name">Model Name:</label>
-              <input type="text" name="name" id="name">
+              <input type="text" name="name" id="name" />
             </div>
             <div>
               <label for="tags">Tags:</label>
-              <select name="tags" id="tags">
-                <option value=""></option>
-              </select>
+              <div class="tags">
+                <div></div>
+              </div>
             </div>
             <div>
-              <label >AR Type:</label>
-              <input type="radio" name="type" id="marker" value="marker">
-              <label for="marker">Marker</label>
-              <input type="radio" name="type" id="gps" value="gps">
-              <label for="gps">GPS</label>
+              <label>AR Type:</label>
+              <div>
+                <input type="radio" name="type" id="marker" value="marker" />
+                <label for="marker">Marker</label>
+                <input type="radio" name="type" id="gps" value="gps" checked />
+                <label for="gps">GPS</label>
+              </div>
             </div>
             <div>
               <label for="longitude">Longitude:</label>
-              <input type="text" name="longitude" id="longitude">
+              <input type="text" name="longitude" id="longitude" />
             </div>
             <div>
               <label for="latitude">Latitude:</label>
-              <input type="text" name="latitude" id="latitude">
+              <input type="text" name="latitude" id="latitude" />
             </div>
           </fieldset>
-        </div> 
-        
+        </div>
+
         <fieldset id="description">
           <legend>Description</legend>
-          <textarea name="description" id="description" cols="40" rows="7"></textarea>
+          <textarea
+            name="description"
+            id="description"
+            cols="40"
+            rows="7"
+          ></textarea>
         </fieldset>
 
         <div id="buttoncon">

@@ -8,19 +8,17 @@
   font-family: "Open Sans", "Arial Narrow", Arial, sans-serif;
   font-size: 16px;
   list-style-type: none;
-  transition: 0.3s;
 }
 
-
 body {
-  background-color: #EDEEEF;
+  background-color: #edeeef;
 }
 
 /* --- General Elements */
 fieldset {
   width: 650px;
   position: relative;
-  padding: 8px 12px;
+  padding: 12px;
   margin-top: 57px;
   margin-bottom: 18px;
   margin-left: auto;
@@ -28,11 +26,16 @@ fieldset {
   border: none;
 }
 
-button {
-  border-width: 2px;
+label {
+  line-height: 26px;
 }
 
-button:hover, button:focus {
+button {
+  border-width: 1px;
+}
+
+button:hover,
+button:focus {
   cursor: pointer;
 }
 
@@ -42,9 +45,9 @@ button:hover, button:focus {
 
   font-size: 20px;
   text-decoration: none;
-  background-color: #4717F1;
+  background-color: #4717f1;
   color: white;
-  border-color: #4717F1;
+  border-color: #4717f1;
   border-style: solid;
 }
 
@@ -89,7 +92,7 @@ main {
 }
 
 h1 {
-  color: #4717F1;
+  color: #4717f1;
   font-size: 34px;
   text-transform: uppercase;
 
@@ -98,12 +101,21 @@ h1 {
 }
 
 /* hide default file button, use label instead */
-input[type=file] {
+input[type="file"] {
   visibility: hidden;
   position: absolute;
   z-index: -1;
 }
 
+input[type="radio"] {
+  margin-left: 12px;
+}
+
+input[type="radio"]:first-of-type {
+  margin-left: 0;
+}
+
+/* first row */
 #formcon {
   display: flex;
   justify-content: space-between;
@@ -113,10 +125,16 @@ div fieldset {
   margin-bottom: 0;
 }
 
+/* - thumbnail - */
 #thumbnailcon {
   width: 250px;
   height: 250px;
   padding: 0;
+  transition: 0.3s;
+}
+
+#thumbnailcon:hover {
+  scale: 0.95;
 }
 
 #thumbnailcon label {
@@ -127,11 +145,26 @@ div fieldset {
   align-items: center;
   text-align: center;
   font-size: 30px;
+  transition: 0.3s;
 }
 
 #thumbnailcon label:hover {
   cursor: pointer;
-  font-size: 33px;
+  font-size: 29px;
+}
+
+/* - form inputs - */
+fieldset div {
+  margin-bottom: 6px;
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* display radios correctly */
+fieldset div div {
+  display: initial;
+  width: 192px;
 }
 
 legend {
@@ -144,10 +177,39 @@ legend {
 label.buttonblue {
   display: inline;
   border: none;
-  font-size: 10px;
+  height: 26px;
+  width: 192px;
+  font-size: 12px;
   text-align: center;
+  padding: 3px 12px;
+  cursor: pointer;
+  line-height: initial;
 }
 
+/* - checkbox popup - */
+.tags {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: none;
+
+  background-color: rgba(87, 87, 87, 0.7);
+}
+
+.tags div {
+  height: 450px;
+  width: 650px;
+  background-color: white;
+  opacity: 1;
+}
+
+/* - description - */
 #description {
   padding: 0;
   background-color: transparent;
@@ -161,11 +223,12 @@ label.buttonblue {
   resize: none;
 }
 
+/* - form buttons - */
 #buttoncon {
   display: flex;
   justify-content: flex-end;
 }
 
 #buttoncon button {
-  margin-left: 6px
+  margin-left: 6px;
 }
