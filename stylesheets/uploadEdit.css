@@ -92,23 +92,8 @@ legend {
 	font-size: 20px;
 }
 
-/* - checkbox popup - */
-.tagspopup {
-	position: fixed;
-	top: 0;
-	left: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100vw;
-	height: 100vh;
-	z-index: 1000;
-
-	background-color: rgba(87, 87, 87, 0.7);
-}
-
 /* popup container */
-.tagspopup div {
+.popup div {
 	position: relative;
 	height: 450px;
 	width: 650px;
@@ -116,31 +101,31 @@ legend {
 	background-color: white;
 }
 
-.tagspopup div div {
+.popup div div {
 	display: flex;
 	height: auto;
 	width: auto;
 	padding: 0;
 }
 
-.tagspopup h2 {
+.popup h2 {
 	font-size: 20px;
 	color: #4717f1;
 	text-transform: uppercase;
 	margin-bottom: 12px;
 }
 
-.tagspopup h3 {
+.popup h3 {
 	margin-bottom: 6px;
 }
 
 /* checkbox group */
-.tagspopup section {
+.popup section {
 	width: 28%;
 }
 
 /* checkbox */
-.tagspopup section div {
+.popup section div {
 	display: flex;
 	justify-content: flex-start;
 	height: auto;
@@ -173,8 +158,37 @@ legend {
 #buttoncon {
 	display: flex;
 	justify-content: flex-end;
+	width: 650px;
+	margin-left: auto;
 }
 
 #buttoncon button {
 	margin-left: 6px;
+}
+
+#buttoncon .buttonpink {
+	margin-right: auto;
+}
+
+/* - delete popup - */
+.delpopup div {
+	height: 250px;
+	width: 500px;
+	text-align: center;
+}
+
+.delpopup h2 {
+	color: black;
+	font-size: 24px;
+	font-weight: normal;
+	text-transform: none;
+}
+
+.delpopup div div {
+	position: absolute;
+	bottom: 42px;
+	right: 42px;
+	width: 416px;
+	justify-content: space-between;
+	background-color: transparent;
 }

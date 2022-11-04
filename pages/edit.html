@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="../stylesheets/styles.css" />
 		<link rel="stylesheet" href="../stylesheets/uploadEdit.css" />
-		<title>Upload Model</title>
+		<title>Edit Model</title>
 		<script src="../scripts/uploadEdit.js" defer></script>
 	</head>
 	<body>
@@ -23,7 +23,7 @@
 		</header>
 
 		<main>
-			<h1>Upload model</h1>
+			<h1>Edit model</h1>
 
 			<form
 				action="/pages/upload.html"
@@ -33,7 +33,7 @@
 				<div id="formcon">
 					<fieldset id="thumbnailcon">
 						<label for="thumbnail"
-							>+<br />
+							>Edit<br />
 							Thumbnail</label
 						>
 						<input type="file" name="thumbnail" id="thumbnail" />
@@ -44,7 +44,7 @@
 						<div>
 							<label for="model">3D Model:</label>
 							<label for="model" class="buttonblue buttonsmall"
-								>Choose File</label
+								>Change File</label
 							>
 							<input
 								type="file"
@@ -213,8 +213,19 @@
 				</fieldset>
 
 				<div id="buttoncon">
+					<button type="button" class="buttonpink">delete</button>
 					<button type="button" class="buttongrey">cancel</button>
 					<button type="submit" class="buttonblue">Upload</button>
+				</div>
+
+				<div class="popup delpopup hidden">
+					<div>
+						<h2>Delete Model?</h2>
+						<div>
+							<button type="button" class="buttongrey">delete</button>
+							<button type="button" class="buttonblue">Cancel</button>
+						</div>
+					</div>
 				</div>
 			</form>
 		</main>

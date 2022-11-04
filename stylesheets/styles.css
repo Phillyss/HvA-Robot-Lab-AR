@@ -49,6 +49,18 @@ button:focus {
 	border-style: solid;
 }
 
+.buttonpink {
+	width: 180px;
+	height: 40px;
+
+	font-size: 20px;
+	text-decoration: none;
+	background-color: transparent;
+	color: #ff2e60;
+	border-color: #ff2e60;
+	border-style: solid;
+}
+
 .buttonsmall {
 	display: inline;
 	border: none;
@@ -63,6 +75,19 @@ button:focus {
 
 .hidden {
 	display: none !important;
+}
+
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+	background-color: rgba(87, 87, 87, 0.7);
 }
 
 /* --- Header --- */

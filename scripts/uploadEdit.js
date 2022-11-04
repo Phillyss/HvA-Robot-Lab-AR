@@ -1,10 +1,13 @@
-const popupAcceptButton = document.querySelector(".tagspopup button");
+const popupAcceptButton = document.querySelector(".popup button");
 const openTagsButton = document.querySelector("fieldset button.buttonblue");
-const tagsPopup = document.querySelector(".tagspopup");
+const tagsPopup = document.querySelector(".popup");
 const markerCB = document.querySelector("#marker");
 const gpsCB = document.querySelector("#gps");
 const longCon = document.querySelector("#longcon");
 const latCon = document.querySelector("#latcon");
+const delButton = document.querySelector("#buttoncon .buttonpink");
+const delPopup = document.querySelector(".delpopup");
+const cancelButton = document.querySelector(".delpopup .buttonblue");
 
 function hideEl(el) {
 	el.classList.add("hidden");
@@ -29,3 +32,5 @@ popupAcceptButton.addEventListener("click", () => hideEl(tagsPopup));
 openTagsButton.addEventListener("click", () => unhideEl(tagsPopup));
 markerCB.addEventListener("change", checkARType);
 gpsCB.addEventListener("change", checkARType);
+delButton.addEventListener("click", () => unhideEl(delPopup));
+cancelButton.addEventListener("click", () => hideEl(delPopup));
