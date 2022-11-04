@@ -63,6 +63,22 @@ button:focus {
   border-style: solid;
 }
 
+.buttonsmall {
+  display: inline;
+  border: none;
+  height: 26px;
+  width: 192px;
+  font-size: 12px;
+  text-align: center;
+  padding: 3px 12px;
+  cursor: pointer;
+  line-height: initial;
+}
+
+.hidden {
+  display: none !important;
+}
+
 /* --- Header --- */
 nav {
   display: flex;
@@ -169,6 +185,7 @@ fieldset div {
 fieldset div div {
   display: initial;
   width: 192px;
+  margin-bottom: 0;
 }
 
 legend {
@@ -176,19 +193,6 @@ legend {
   top: -40px;
   left: 0;
   font-size: 20px;
-}
-
-label.buttonblue,
-fieldset button.buttonblue {
-  display: inline;
-  border: none;
-  height: 26px;
-  width: 192px;
-  font-size: 12px;
-  text-align: center;
-  padding: 3px 12px;
-  cursor: pointer;
-  line-height: initial;
 }
 
 /* - checkbox popup - */

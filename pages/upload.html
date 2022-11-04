@@ -42,7 +42,7 @@
             <legend>Information</legend>
             <div>
               <label for="model">3D Model:</label>
-              <label for="model" class="buttonblue">Choose File</label>
+              <label for="model" class="buttonblue buttonsmall">Choose File</label>
               <input
                 type="file"
                 name="model"
@@ -56,8 +56,8 @@
             </div>
             <div>
               <label>Tags:</label>
-              <button type="button" class="buttonblue">Open Tags</button>
-              <div class="tagspopup">
+              <button type="button" class="buttonblue buttonsmall">Open Tags</button>
+              <div class="tagspopup hidden">
                 <div>
                   <h2>Tags</h2>
                   <div>
@@ -174,17 +174,17 @@
             <div>
               <label>AR Type:</label>
               <div>
-                <input type="radio" name="type" id="marker" value="marker" />
+                <input type="radio" name="type" id="marker" value="marker" checked />
                 <label for="marker">Marker</label>
-                <input type="radio" name="type" id="gps" value="gps" checked />
+                <input type="radio" name="type" id="gps" value="gps" />
                 <label for="gps">GPS</label>
               </div>
             </div>
-            <div>
+            <div id="longcon" class="hidden">
               <label for="longitude">Longitude:</label>
               <input type="text" name="longitude" id="longitude" />
             </div>
-            <div>
+            <div id="latcon" class="hidden">
               <label for="latitude">Latitude:</label>
               <input type="text" name="latitude" id="latitude" />
             </div>
