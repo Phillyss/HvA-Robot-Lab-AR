@@ -1,211 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles.css" />
-    <title>Upload Model</title>
-    <script src="../script.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <a><img src="../images/" /></a>
-        <ul>
-          <li>Overview</li>
-          <li>Manuals</li>
-          <li>Troubleshooting</li>
-        </ul>
-        <button type="button"><img src="../images/" /></button>
-      </nav>
-    </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../stylesheets/styles.css" />
+		<link rel="stylesheet" href="../stylesheets/upload.css" />
+		<title>Upload Model</title>
+		<script src="../script.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="upload.html"><img src="../images/" /></a>
+				<ul>
+					<li>Overview</li>
+					<li>Manuals</li>
+					<li>Troubleshooting</li>
+				</ul>
+				<button type="button"><img src="../images/" /></button>
+			</nav>
+		</header>
 
-    <main>
-      <h1>Upload model</h1>
+		<main>
+			<h1>Upload model</h1>
 
-      <form
-        action="/pages/upload.html"
-        method="GET"
-        enctype="multipart/form-data"
-      >
-        <div id="formcon">
-          <fieldset id="thumbnailcon">
-            <label for="thumbnail"
-              >+<br />
-              Thumbnail</label
-            >
-            <input type="file" name="thumbnail" id="thumbnail" />
-          </fieldset>
+			<form
+				action="/pages/upload.html"
+				method="GET"
+				enctype="multipart/form-data"
+			>
+				<div id="formcon">
+					<fieldset id="thumbnailcon">
+						<label for="thumbnail"
+							>+<br />
+							Thumbnail</label
+						>
+						<input type="file" name="thumbnail" id="thumbnail" />
+					</fieldset>
 
-          <fieldset>
-            <legend>Information</legend>
-            <div>
-              <label for="model">3D Model:</label>
-              <label for="model" class="buttonblue buttonsmall">Choose File</label>
-              <input
-                type="file"
-                name="model"
-                id="model"
-                placeholder="Thumbnail"
-              />
-            </div>
-            <div>
-              <label for="name">Model Name:</label>
-              <input type="text" name="name" id="name" />
-            </div>
-            <div>
-              <label>Tags:</label>
-              <button type="button" class="buttonblue buttonsmall">Open Tags</button>
-              <div class="tagspopup hidden">
-                <div>
-                  <h2>Tags</h2>
-                  <div>
-                    <section>
-                      <h3>Projects</h3>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                    </section>
-                    <section>
-                      <h3>Projects</h3>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                    </section>
-                    <section>
-                      <h3>Projects</h3>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="greenmile"
-                          id="greenmile"
-                        />
-                        <label for="greenmile">Green Mile</label>
-                      </div>
-                    </section>
-                  </div>
-                  <button type="button" class="buttonblue">Accept</button>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label>AR Type:</label>
-              <div>
-                <input type="radio" name="type" id="marker" value="marker" checked />
-                <label for="marker">Marker</label>
-                <input type="radio" name="type" id="gps" value="gps" />
-                <label for="gps">GPS</label>
-              </div>
-            </div>
-            <div id="longcon" class="hidden">
-              <label for="longitude">Longitude:</label>
-              <input type="text" name="longitude" id="longitude" />
-            </div>
-            <div id="latcon" class="hidden">
-              <label for="latitude">Latitude:</label>
-              <input type="text" name="latitude" id="latitude" />
-            </div>
-          </fieldset>
-        </div>
+					<fieldset>
+						<legend>Information</legend>
+						<div>
+							<label for="model">3D Model:</label>
+							<label for="model" class="buttonblue buttonsmall"
+								>Choose File</label
+							>
+							<input
+								type="file"
+								name="model"
+								id="model"
+								placeholder="Thumbnail"
+							/>
+						</div>
+						<div>
+							<label for="name">Model Name:</label>
+							<input type="text" name="name" id="name" />
+						</div>
+						<div>
+							<label>Tags:</label>
+							<button type="button" class="buttonblue buttonsmall">
+								Open Tags
+							</button>
+							<div class="tagspopup hidden">
+								<div>
+									<h2>Tags</h2>
+									<div>
+										<section>
+											<h3>Projects</h3>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+										</section>
+										<section>
+											<h3>Projects</h3>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+										</section>
+										<section>
+											<h3>Projects</h3>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+											<div>
+												<input
+													type="checkbox"
+													name="greenmile"
+													id="greenmile"
+												/>
+												<label for="greenmile">Green Mile</label>
+											</div>
+										</section>
+									</div>
+									<button type="button" class="buttonblue">Accept</button>
+								</div>
+							</div>
+						</div>
+						<div>
+							<label>AR Type:</label>
+							<div>
+								<input
+									type="radio"
+									name="type"
+									id="marker"
+									value="marker"
+									checked
+								/>
+								<label for="marker">Marker</label>
+								<input type="radio" name="type" id="gps" value="gps" />
+								<label for="gps">GPS</label>
+							</div>
+						</div>
+						<div id="longcon" class="hidden">
+							<label for="longitude">Longitude:</label>
+							<input type="text" name="longitude" id="longitude" />
+						</div>
+						<div id="latcon" class="hidden">
+							<label for="latitude">Latitude:</label>
+							<input type="text" name="latitude" id="latitude" />
+						</div>
+					</fieldset>
+				</div>
 
-        <fieldset id="description">
-          <legend>Description</legend>
-          <textarea
-            name="description"
-            id="description"
-            cols="40"
-            rows="7"
-          ></textarea>
-        </fieldset>
+				<fieldset id="description">
+					<legend>Description</legend>
+					<textarea
+						name="description"
+						id="description"
+						cols="40"
+						rows="7"
+					></textarea>
+				</fieldset>
 
-        <div id="buttoncon">
-          <button type="button" class="buttongrey">cancel</button>
-          <button type="submit" class="buttonblue">Upload</button>
-        </div>
-      </form>
-    </main>
-  </body>
+				<div id="buttoncon">
+					<button type="button" class="buttongrey">cancel</button>
+					<button type="submit" class="buttonblue">Upload</button>
+				</div>
+			</form>
+		</main>
+	</body>
 </html>

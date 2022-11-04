@@ -1,0 +1,103 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+
+	font-family: "Open Sans", "Arial Narrow", Arial, sans-serif;
+	font-size: 16px;
+	list-style-type: none;
+}
+
+body {
+	background-color: #edeeef;
+}
+
+/* --- General Elements */
+
+button {
+	border-width: 1px;
+}
+
+button:hover,
+button:focus {
+	cursor: pointer;
+}
+
+.buttonblue {
+	width: 180px;
+	height: 40px;
+
+	font-size: 20px;
+	text-decoration: none;
+	background-color: #4717f1;
+	color: white;
+	border-color: #4717f1;
+	border-style: solid;
+}
+
+.buttongrey {
+	width: 180px;
+	height: 40px;
+
+	font-size: 20px;
+	text-decoration: none;
+	background-color: transparent;
+	color: #575757;
+	border-color: #575757;
+	border-style: solid;
+}
+
+.buttonsmall {
+	display: inline;
+	border: none;
+	height: 26px;
+	width: 192px;
+	font-size: 12px;
+	text-align: center;
+	padding: 3px 12px;
+	cursor: pointer;
+	line-height: initial;
+}
+
+.hidden {
+	display: none !important;
+}
+
+/* --- Header --- */
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	height: 70px;
+	padding: 0 18px;
+	margin-bottom: 18px;
+}
+
+nav ul {
+	display: flex;
+	justify-content: space-between;
+	width: 403px;
+}
+
+nav li {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* --- Main --- */
+main {
+	margin: auto auto;
+	width: 918px;
+}
+
+h1 {
+	color: #4717f1;
+	font-size: 34px;
+	text-transform: uppercase;
+
+	margin-bottom: 12px;
+	margin-bottom: 0px;
+}

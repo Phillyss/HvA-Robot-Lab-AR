@@ -7,22 +7,22 @@ const longCon = document.querySelector("#longcon");
 const latCon = document.querySelector("#latcon");
 
 function hideEl(el) {
-  el.classList.add("hidden");
+	el.classList.add("hidden");
 }
 
 function unhideEl(el) {
-  el.classList.remove("hidden");
+	el.classList.remove("hidden");
 }
 
 // switch between AR types
 function checkARType() {
-  if (markerCB.checked) {
-    hideEl(longCon);
-    hideEl(latCon);
-  } else if (gpsCB.checked) {
-    unhideEl(longCon);
-    unhideEl(latCon);
-  }
+	if (markerCB.checked) {
+		hideEl(longCon);
+		hideEl(latCon);
+	} else if (gpsCB.checked) {
+		unhideEl(longCon);
+		unhideEl(latCon);
+	}
 }
 
 popupAcceptButton.addEventListener("click", () => hideEl(tagsPopup));

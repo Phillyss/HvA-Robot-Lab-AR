@@ -1,0 +1,180 @@
+fieldset {
+	width: 650px;
+	position: relative;
+	padding: 12px;
+	margin-top: 57px;
+	margin-bottom: 18px;
+	margin-left: auto;
+	background-color: white;
+	border: none;
+}
+
+label {
+	line-height: 26px;
+}
+
+/* hide default file button, use label instead */
+input[type="file"] {
+	visibility: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+input[type="radio"] {
+	margin-left: 12px;
+}
+
+input[type="radio"]:first-of-type {
+	margin-left: 0;
+}
+
+input[type="checkbox"] {
+	margin-right: 6px;
+}
+
+/* top row */
+#formcon {
+	display: flex;
+	justify-content: space-between;
+}
+
+div fieldset {
+	margin-bottom: 0;
+}
+
+/* - thumbnail - */
+#thumbnailcon {
+	width: 250px;
+	height: 250px;
+	padding: 0;
+	transition: 0.3s;
+}
+
+#thumbnailcon:hover {
+	scale: 0.95;
+}
+
+#thumbnailcon label {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 30px;
+	transition: 0.3s;
+}
+
+#thumbnailcon label:hover {
+	cursor: pointer;
+	font-size: 29px;
+}
+
+/* - info inputs - */
+fieldset div {
+	margin-bottom: 6px;
+	width: 320px;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* display radios correctly */
+fieldset div div {
+	display: initial;
+	width: 192px;
+	margin-bottom: 0;
+}
+
+legend {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	font-size: 20px;
+}
+
+/* - checkbox popup - */
+.tagspopup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+
+	background-color: rgba(87, 87, 87, 0.7);
+}
+
+/* popup container */
+.tagspopup div {
+	position: relative;
+	height: 450px;
+	width: 650px;
+	padding: 42px;
+	background-color: white;
+}
+
+.tagspopup div div {
+	display: flex;
+	height: auto;
+	width: auto;
+	padding: 0;
+}
+
+.tagspopup h2 {
+	font-size: 20px;
+	color: #4717f1;
+	text-transform: uppercase;
+	margin-bottom: 12px;
+}
+
+.tagspopup h3 {
+	margin-bottom: 6px;
+}
+
+/* checkbox group */
+.tagspopup section {
+	width: 28%;
+}
+
+/* checkbox */
+.tagspopup section div {
+	display: flex;
+	justify-content: flex-start;
+	height: auto;
+	width: auto;
+	padding: 0;
+	margin: 0;
+}
+
+.tagspopup button {
+	position: absolute;
+	bottom: 42px;
+	right: 42px;
+}
+
+/* - description - */
+#description {
+	padding: 0;
+	background-color: transparent;
+}
+
+#description textarea {
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	padding: 6px;
+	resize: none;
+}
+
+/* - form buttons - */
+#buttoncon {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#buttoncon button {
+	margin-left: 6px;
+}
