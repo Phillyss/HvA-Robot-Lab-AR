@@ -4,7 +4,6 @@ fieldset {
 	padding: 12px;
 	margin-top: 57px;
 	margin-bottom: 18px;
-	margin-left: auto;
 	background-color: white;
 	border: none;
 }
@@ -142,6 +141,7 @@ legend {
 
 /* - description - */
 #description {
+	margin-left: auto;
 	padding: 0;
 	background-color: transparent;
 }

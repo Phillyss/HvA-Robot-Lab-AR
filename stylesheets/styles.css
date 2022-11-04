@@ -18,11 +18,15 @@ body {
 
 button {
 	border-width: 1px;
+	transition: 0.3s;
 }
 
 button:hover,
-button:focus {
+button:focus,
+.buttonblue:hover,
+.buttonblue:focus {
 	cursor: pointer;
+	scale: 0.95;
 }
 
 .buttonblue {
@@ -35,6 +39,7 @@ button:focus {
 	color: white;
 	border-color: #4717f1;
 	border-style: solid;
+	transition: 0.3s;
 }
 
 .buttongrey {
@@ -47,6 +52,7 @@ button:focus {
 	color: #575757;
 	border-color: #575757;
 	border-style: solid;
+	transition: 0.3s;
 }
 
 .buttonpink {
@@ -59,6 +65,7 @@ button:focus {
 	color: #ff2e60;
 	border-color: #ff2e60;
 	border-style: solid;
+	transition: 0.3s;
 }
 
 .buttonsmall {
