@@ -1,5 +1,53 @@
 main {
+	width: 100vw;
+	display: flex;
+}
+
+/* --- Sidebar --- */
+aside {
+	width: 330px;
+	min-width: 330px;
+}
+
+aside a {
+	display: block;
+	margin: 64px auto 0 auto;
+	line-height: 35px;
+}
+
+aside div {
+	margin: 18px 30px;
+}
+
+aside div div {
+	margin: initial;
+}
+
+aside h2 {
+	font-size: 24px;
+	color: #4717f1;
+	margin-bottom: 6px;
+}
+
+aside .buttonsmall {
+	display: block;
+	margin: 6px auto 12px auto;
+}
+
+aside .label {
+	font-weight: bold;
+	display: block;
+	margin-bottom: 3px;
+}
+
+aside input[type="text"] {
+	margin-bottom: 12px;
+}
+
+/* --- Content ---  */
+section {
 	width: 1020px;
+	margin-right: 60px;
 }
 
 h1 {
@@ -112,4 +160,14 @@ main li:hover div:nth-of-type(2) {
 
 main li:hover div:nth-of-type(3) {
 	bottom: 44px;
+}
+
+@media (max-width: 1380px) {
+	section {
+		width: 660px;
+	}
+
+	main {
+		justify-content: space-evenly;
+	}
 }
