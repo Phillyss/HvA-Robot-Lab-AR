@@ -26,12 +26,26 @@ section {
   padding: 64px;
 }
 
+section.signup {
+  padding-top: 32px;
+}
+
+h1 {
+  margin-bottom: 32px;
+}
+
 p {
   position: absolute;
   top: 25px;
   left: 50%;
   transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
   color: #ff2e60;
+}
+
+p.signup {
+  top: 341px;
 }
 
 form input {
