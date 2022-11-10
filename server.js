@@ -2,7 +2,6 @@
 const express = require("express");
 const partials = require("express-partials");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 require("dotenv").config();
 
 // DB setup
@@ -24,9 +23,15 @@ const port = process.env.PORT || 3000;
 
 // setup express
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 app.use(partials());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+
+// use middleware
+//app.use(logger);
+
+//use middleware in route
+//app.get("/", logger, (req, res) => res.render("pages/overview"));
 
 // define routes
 const userRouter = require("./routes/users");
@@ -34,6 +39,13 @@ const userRouter = require("./routes/users");
 app.get("/", (req, res) => res.render("pages/overview"));
 app.use("/users", userRouter);
 
+// middelware
+function logger(req, res, next) {
+  console.log(req.originalUrl);
+  next();
+}
+
+// test
 const userModel = require("./schemas/userSchema");
 
 async function dbTest() {

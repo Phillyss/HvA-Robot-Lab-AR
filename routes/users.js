@@ -6,7 +6,34 @@ router.get("/", (req, res) => {
 });
 
 router.get("/new", (req, res) => {
-  res.send("new user");
+  res.render("pages/signup", { mail: "email@hva.nl" });
+});
+
+router.post("/new", (req, res) => {
+  const isValid = false;
+  if (isValid) {
+    res.redirect("/users/3");
+  } else {
+    res.render("pages/signup", { email: req.body.email });
+  }
+});
+
+router
+  .route("/:id")
+  .get((req, res) => {
+    res.send(`user ${req.params.id}`);
+  })
+  .put((req, res) => {
+    res.send(`update ${req.params.id}`);
+  })
+  .delete((req, res) => {
+    res.send(`delete ${req.params.id}`);
+  });
+
+// run before router
+router.param("id", (req, res, next, id) => {
+  console.log(id);
+  next();
 });
 
 module.exports = router;
