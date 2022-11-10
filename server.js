@@ -18,26 +18,37 @@ db.once("open", () => {
   console.log("db connected!");
 });
 
+// init express
 const app = express();
 const port = process.env.PORT || 3000;
 
-// declare static folder and partials
+// setup express
 app.use(express.static("public"));
 app.use(partials());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
 
-app.get("/test", async (req, res) => {
-  const user = await userModel.create();
-  const save = await user.save();
-  res.send("test");
-});
+// define routes
+const userRouter = require("./routes/users");
 
-//const userModel = require("./schemas/userSchema");
+app.get("/", (req, res) => res.render("pages/overview"));
+app.use("/users", userRouter);
+
+const userModel = require("./schemas/userSchema");
 
 async function dbTest() {
-  const user = await userModel.create();
-  console.log(user);
-  //const save = await user.save();
+  try {
+    const user = await userModel.create({
+      id: 2,
+      name: "Philip van Egmond",
+    });
+    const save = await user.save();
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 //dbTest();
+
+// succes message
+app.listen(port, () => console.log(`Listening to port: ${port}`));
