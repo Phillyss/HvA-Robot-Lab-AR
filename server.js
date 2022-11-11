@@ -7,14 +7,14 @@ require("dotenv").config();
 // DB setup
 const uri = process.env.URI;
 mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
-  console.log("db connected!");
+	console.log("db connected!");
 });
 
 // init express
@@ -41,23 +41,24 @@ app.use("/users", userRouter);
 
 // middelware
 function logger(req, res, next) {
-  console.log(req.originalUrl);
-  next();
+	console.log(req.originalUrl);
+	next();
 }
 
 // test
 const userModel = require("./schemas/userSchema");
 
 async function dbTest() {
-  try {
-    const user = await userModel.create({
-      id: 2,
-      name: "Philip van Egmond",
-    });
-    const save = await user.save();
-  } catch (err) {
-    console.log(err);
-  }
+	try {
+		const user = await userModel.create({
+			id: 2,
+			name: "Philip van Egmond",
+			email: "test@hva.nl",
+		});
+		const save = await user.save();
+	} catch (err) {
+		console.log(err);
+	}
 }
 
 //dbTest();
