@@ -1,32 +1,35 @@
 const express = require("express");
 const router = express.Router();
-const userModel = require("../schemas/userSchema");
+const modelModel = require("../schemas/modelSchema");
 
-// /users page
+// /models: overview page
 router.get("/", (req, res) => {
-	res.render("pages/edit.ejs");
+	res.redirect("/");
 });
 
-// /users/new: signup
+// /models/new: upload page
 router.get("/new", (req, res) => {
-	res.render("pages/signup", { mail: "email@hva.nl" });
+	res.render("pages/upload", { mail: "email@hva.nl" });
 });
 
-// upload new user to db
+// upload new model to db
 router.post("/new", async (req, res) => {
 	try {
 		const isValid = true;
 		if (isValid) {
-			const newUser = await userModel.create({
+			const newModel = await userModel.create({
 				id: 2,
-				name: req.body.fullname,
-				email: req.body.email,
-				password: req.body.password,
+				title: req.body.title,
+				description: req.body.description,
+				type: req.body.type,
+				tags: req.body.tags,
+				longitude: req.body.longitude,
+				latitude: req.body.latitude,
 			});
-			const save = await newUser.save();
-			res.redirect("/users/3");
+			const save = await newModel.save();
+			res.redirect("/models/3");
 		} else {
-			res.render("pages/signup", {
+			res.render("pages/upload", {
 				email: req.body.email,
 				name: req.body.fullname,
 			});
@@ -36,9 +39,8 @@ router.post("/new", async (req, res) => {
 	}
 });
 
-// /users/userid
 router
-	.route("/:id")
+	.route("/:id/edit")
 	.get((req, res) => {
 		res.send(`user ${req.params.id}`);
 	})

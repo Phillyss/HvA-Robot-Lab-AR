@@ -35,9 +35,12 @@ app.set("view engine", "ejs");
 
 // define routes
 const userRouter = require("./routes/users");
+const modelRouter = require("./routes/models");
 
 app.get("/", (req, res) => res.render("pages/overview"));
+app.get("/login", (req, res) => res.render("pages/login"));
 app.use("/users", userRouter);
+app.use("/models", modelRouter);
 
 // middelware
 function logger(req, res, next) {
