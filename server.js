@@ -45,23 +45,5 @@ function logger(req, res, next) {
 	next();
 }
 
-// test
-const userModel = require("./schemas/userSchema");
-
-async function dbTest() {
-	try {
-		const user = await userModel.create({
-			id: 2,
-			name: "Philip van Egmond",
-			email: "test@hva.nl",
-		});
-		const save = await user.save();
-	} catch (err) {
-		console.log(err);
-	}
-}
-
-//dbTest();
-
 // succes message
 app.listen(port, () => console.log(`Listening to port: ${port}`));

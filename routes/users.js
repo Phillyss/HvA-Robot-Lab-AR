@@ -3,7 +3,7 @@ const router = express.Router();
 const userModel = require("../schemas/userSchema");
 
 router.get("/", (req, res) => {
-	res.send("users");
+	res.render("pages/edit.ejs");
 });
 
 router.get("/new", (req, res) => {
