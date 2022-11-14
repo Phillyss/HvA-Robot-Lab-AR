@@ -8,16 +8,16 @@ router.get("/", (req, res) => {
 });
 
 // /models/new: upload page
-router.get("/new", (req, res) => {
-	res.render("pages/upload", { mail: "email@hva.nl" });
+router.get("/upload", (req, res) => {
+	res.render("pages/upload2");
 });
 
 // upload new model to db
-router.post("/new", async (req, res) => {
+router.post("/upload", async (req, res) => {
 	try {
 		const isValid = true;
 		if (isValid) {
-			const newModel = await userModel.create({
+			const newModel = await modelModel.create({
 				id: 2,
 				title: req.body.title,
 				description: req.body.description,
@@ -29,10 +29,7 @@ router.post("/new", async (req, res) => {
 			const save = await newModel.save();
 			res.redirect("/models/3");
 		} else {
-			res.render("pages/upload", {
-				email: req.body.email,
-				name: req.body.fullname,
-			});
+			res.render("pages/upload", {});
 		}
 	} catch (err) {
 		console.log(err);
@@ -42,7 +39,7 @@ router.post("/new", async (req, res) => {
 router
 	.route("/:id/edit")
 	.get((req, res) => {
-		res.send(`user ${req.params.id}`);
+		res.render("pages/edit");
 	})
 	.put((req, res) => {
 		res.send(`update ${req.params.id}`);

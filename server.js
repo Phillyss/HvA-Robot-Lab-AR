@@ -37,8 +37,28 @@ app.set("view engine", "ejs");
 const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
 
+const modelModel = require("./schemas/modelSchema");
+
 app.get("/", (req, res) => res.render("pages/overview"));
 app.get("/login", (req, res) => res.render("pages/login"));
+app.get("/test", async (req, res) => {
+	try {
+		const newModel = await modelModel.create({
+			id: 2,
+			title: "test",
+			description: "test desc",
+			type: "GPS",
+			tags: ["tag1", "tag2", "tag3"],
+			longitude: 4.33456,
+			latitude: 34.53435,
+		});
+		const save = await newModel.save();
+		console.log("new model");
+		res.send("test");
+	} catch (err) {
+		console.log(err);
+	}
+});
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
 

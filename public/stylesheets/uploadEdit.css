@@ -139,6 +139,10 @@ legend {
 	right: 42px;
 }
 
+.tagspopup label {
+	font-size: 12px;
+}
+
 /* - description - */
 #description {
 	margin-left: auto;
