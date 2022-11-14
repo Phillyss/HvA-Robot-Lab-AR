@@ -15,22 +15,17 @@ router.get("/upload", (req, res) => {
 // upload new model to db
 router.post("/upload", async (req, res) => {
 	try {
-		const isValid = true;
-		if (isValid) {
-			const newModel = await modelModel.create({
-				id: 2,
-				title: req.body.title,
-				description: req.body.description,
-				type: req.body.type,
-				tags: req.body.tags,
-				longitude: req.body.longitude,
-				latitude: req.body.latitude,
-			});
-			const save = await newModel.save();
-			res.redirect("/models/3");
-		} else {
-			res.render("pages/upload", {});
-		}
+		const newModel = await modelModel.create({
+			id: 2,
+			title: req.body.name,
+			description: req.body.description,
+			type: req.body.type,
+			tags: req.body.tags,
+			longitude: req.body.longitude,
+			latitude: req.body.latitude,
+		});
+		const save = await newModel.save();
+		res.redirect("/");
 	} catch (err) {
 		console.log(err);
 	}
