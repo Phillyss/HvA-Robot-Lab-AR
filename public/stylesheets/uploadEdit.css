@@ -1,198 +1,198 @@
 fieldset {
-	width: 650px;
-	position: relative;
-	padding: 12px;
-	margin-top: 57px;
-	margin-bottom: 18px;
-	background-color: white;
-	border: none;
+  width: 650px;
+  position: relative;
+  padding: 12px;
+  margin-top: 57px;
+  margin-bottom: 18px;
+  background-color: white;
+  border: none;
 }
 
 label {
-	line-height: 26px;
+  line-height: 26px;
 }
 
 /* hide default file button, use label instead */
 input[type="file"] {
-	visibility: hidden;
-	position: absolute;
-	z-index: -1;
+  visibility: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 input[type="radio"] {
-	margin-left: 12px;
+  margin-left: 12px;
 }
 
 input[type="radio"]:first-of-type {
-	margin-left: 0;
+  margin-left: 0;
 }
 
 input[type="checkbox"] {
-	margin-right: 6px;
+  margin-right: 6px;
 }
 
 /* top row */
 #formcon {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 div fieldset {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 /* - thumbnail - */
 #thumbnailcon {
-	width: 250px;
-	height: 250px;
-	padding: 0;
-	transition: 0.3s;
+  width: 250px;
+  height: 250px;
+  padding: 0;
+  transition: 0.3s;
 }
 
 #thumbnailcon:hover {
-	scale: 0.95;
+  scale: 0.95;
 }
 
 #thumbnailcon label {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	font-size: 30px;
-	transition: 0.3s;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+  transition: 0.3s;
 }
 
 #thumbnailcon label:hover {
-	cursor: pointer;
-	font-size: 29px;
+  cursor: pointer;
+  font-size: 29px;
 }
 
 /* - info inputs - */
 fieldset div {
-	margin-bottom: 6px;
-	width: 320px;
-	display: flex;
-	justify-content: space-between;
+  margin-bottom: 6px;
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* display radios correctly */
 fieldset div div {
-	display: initial;
-	width: 192px;
-	margin-bottom: 0;
+  display: initial;
+  width: 192px;
+  margin-bottom: 0;
 }
 
 legend {
-	position: absolute;
-	top: -40px;
-	left: 0;
-	font-size: 20px;
+  position: absolute;
+  top: -40px;
+  left: 0;
+  font-size: 20px;
 }
 
 /* popup container */
 .popup div {
-	position: relative;
-	height: 450px;
-	width: 650px;
-	padding: 42px;
-	background-color: white;
+  position: relative;
+  height: 450px;
+  width: 650px;
+  padding: 42px;
+  background-color: white;
 }
 
 .popup div div {
-	display: flex;
-	height: auto;
-	width: auto;
-	padding: 0;
+  display: flex;
+  height: auto;
+  width: auto;
+  padding: 0;
 }
 
 .popup h2 {
-	font-size: 20px;
-	color: #4717f1;
-	text-transform: uppercase;
-	margin-bottom: 12px;
+  font-size: 20px;
+  color: #4717f1;
+  text-transform: uppercase;
+  margin-bottom: 12px;
 }
 
 .popup h3 {
-	margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 /* checkbox group */
 .popup section {
-	width: 28%;
+  width: 28%;
 }
 
 /* checkbox */
 .popup section div {
-	display: flex;
-	justify-content: flex-start;
-	height: auto;
-	width: auto;
-	padding: 0;
-	margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  height: auto;
+  width: auto;
+  padding: 0;
+  margin: 0;
 }
 
 .tagspopup button {
-	position: absolute;
-	bottom: 42px;
-	right: 42px;
+  position: absolute;
+  bottom: 42px;
+  right: 42px;
 }
 
 .tagspopup label {
-	font-size: 12px;
+  font-size: 12px;
 }
 
 /* - description - */
-#description {
-	margin-left: auto;
-	padding: 0;
-	background-color: transparent;
+#descriptionfieldset {
+  margin-left: auto;
+  padding: 0;
+  background-color: transparent;
 }
 
-#description textarea {
-	height: 100%;
-	width: 100%;
-	background-color: white;
-	padding: 6px;
-	resize: none;
+#descriptionfieldset textarea {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  padding: 6px;
+  resize: none;
 }
 
 /* - form buttons - */
 #buttoncon {
-	display: flex;
-	justify-content: flex-end;
-	width: 650px;
-	margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  width: 650px;
+  margin-left: auto;
 }
 
 #buttoncon button {
-	margin-left: 6px;
+  margin-left: 6px;
 }
 
 #buttoncon .buttonpink {
-	margin-right: auto;
+  margin-right: auto;
 }
 
 /* - delete popup - */
 .delpopup div {
-	height: 250px;
-	width: 500px;
-	text-align: center;
+  height: 250px;
+  width: 500px;
+  text-align: center;
 }
 
 .delpopup h2 {
-	color: black;
-	font-size: 24px;
-	font-weight: normal;
-	text-transform: none;
+  color: black;
+  font-size: 24px;
+  font-weight: normal;
+  text-transform: none;
 }
 
 .delpopup div div {
-	position: absolute;
-	bottom: 42px;
-	right: 42px;
-	width: 416px;
-	justify-content: space-between;
-	background-color: transparent;
+  position: absolute;
+  bottom: 42px;
+  right: 42px;
+  width: 416px;
+  justify-content: space-between;
+  background-color: transparent;
 }

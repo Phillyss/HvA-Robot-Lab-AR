@@ -7,14 +7,14 @@ require("dotenv").config();
 // DB setup
 const uri = process.env.URI;
 mongoose.connect(uri, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
-	console.log("db connected!");
+  console.log("db connected!");
 });
 
 // init express
@@ -46,8 +46,8 @@ app.use("/models", modelRouter);
 
 // middelware
 function logger(req, res, next) {
-	console.log(req.originalUrl);
-	next();
+  console.log(req.originalUrl);
+  next();
 }
 
 // succes message
