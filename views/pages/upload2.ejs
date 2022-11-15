@@ -25,7 +25,7 @@
     <main>
       <h1>Upload model</h1>
 
-      <form action="/models/upload" method="POST">
+      <form action="/models/upload" method="POST" enctype="multipart/form-data">
         <div id="formcon">
           <fieldset id="thumbnailcon">
             <label for="thumbnail"
@@ -42,12 +42,7 @@
               <label for="model" class="buttonblue buttonsmall"
                 >Choose File</label
               >
-              <input
-                type="file"
-                name="model"
-                id="model"
-                placeholder="Thumbnail"
-              />
+              <input type="file" name="model" id="model" />
             </div>
             <div>
               <label for="name">Model Name:</label>

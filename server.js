@@ -2,6 +2,8 @@
 const express = require("express");
 const partials = require("express-partials");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const multer = require("multer");
 require("dotenv").config();
 
 // DB setup
@@ -22,16 +24,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // setup express
+app.use(cors());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(partials());
 app.set("view engine", "ejs");
-
-// use middleware
-//app.use(logger);
-
-//use middleware in route
-//app.get("/", logger, (req, res) => res.render("pages/overview"));
 
 // define routes
 const userRouter = require("./routes/users");
@@ -43,12 +40,6 @@ app.get("/", (req, res) => res.render("pages/overview"));
 app.get("/login", (req, res) => res.render("pages/login"));
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
-
-// middelware
-function logger(req, res, next) {
-  console.log(req.originalUrl);
-  next();
-}
 
 // succes message
 app.listen(port, () => console.log(`Listening to port: ${port}`));
