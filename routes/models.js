@@ -4,26 +4,16 @@ const multer = require("multer");
 const modelModel = require("../schemas/modelSchema");
 
 // setup multer: file upload
-const thumbnailStorageEgnine = multer.diskStorage({
+const fileStorageEgnine = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./localFiles");
+    cb(null, "./localFiles/users/2/models/1");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "--" + file.originalname);
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
-const modelFileStorageEgine = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./localFiles");
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "---" + file.originalname);
-  },
-});
-
-const uploadThumbnail = multer({ storage: thumbnailStorageEgnine });
-const uploadModelFile = multer({ storage: modelFileStorageEgine });
+const upload = multer({ storage: fileStorageEgnine });
 
 // /models: overview page
 router.get("/", (req, res) => {
@@ -36,30 +26,38 @@ router.get("/upload", (req, res) => {
 });
 
 // upload new model to db
-router.post("/upload", uploadModelFile.single("model"), async (req, res) => {
-  try {
-    const tagsArray = req.body.tags.split(", ");
-    let long = 0;
-    let lat = 0;
+router.post(
+  "/upload",
+  upload.fields([
+    { name: "thumbnail", maxCount: 1 },
+    { name: "model", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const tagsArray = req.body.tags.split(", ");
+      let long = 0;
+      let lat = 0;
 
-    if (req.body.longitude !== "") long = Number(req.body.longitude);
-    if (req.body.latitude !== "") lat = Number(req.body.latitude);
+      if (req.body.longitude !== "") long = Number(req.body.longitude);
+      if (req.body.latitude !== "") lat = Number(req.body.latitude);
 
-    const newModel = await modelModel.create({
-      id: 2,
-      name: req.body.name,
-      description: req.body.description,
-      type: req.body.type,
-      tags: tagsArray,
-      longitude: long,
-      latitude: lat,
-    });
-    const save = await newModel.save();
-    res.redirect("/");
-  } catch (err) {
-    console.log(err);
+      const newModel = await modelModel.create({
+        modelid: 2,
+        userid: 2,
+        name: req.body.name,
+        description: req.body.description,
+        type: req.body.type,
+        tags: tagsArray,
+        longitude: long,
+        latitude: lat,
+      });
+      const save = await newModel.save();
+      res.redirect("/");
+    } catch (err) {
+      console.log(err);
+    }
   }
-});
+);
 
 router
   .route("/:id/edit")
@@ -73,6 +71,11 @@ router
     res.send(`delete ${req.params.id}`);
   });
 
+function uploadFiles(req, res, next) {
+  uploadThumbnail.single("thumbnail")(req, res, next);
+  uploadModelFile.single("model")(req, res, next);
+  next();
+}
 // run before router
 // router.param("id", (req, res, next, id) => {
 // 	console.log(id);
