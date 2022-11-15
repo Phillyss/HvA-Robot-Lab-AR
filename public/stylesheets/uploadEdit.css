@@ -61,6 +61,9 @@ div fieldset {
   align-items: center;
   text-align: center;
   font-size: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   transition: 0.3s;
 }
 
