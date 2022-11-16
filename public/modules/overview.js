@@ -2,10 +2,6 @@ const popupAcceptButton = document.querySelector(".popup button");
 const openTagsButton = document.querySelector("aside button.buttonblue");
 const tagsPopup = document.querySelector(".popup");
 
-console.log(popupAcceptButton);
-console.log(openTagsButton);
-console.log(tagsPopup);
-
 function hideEl(el) {
 	el.classList.add("hidden");
 }

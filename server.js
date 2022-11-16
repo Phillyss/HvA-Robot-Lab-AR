@@ -31,10 +31,11 @@ app.use(partials());
 app.set("view engine", "ejs");
 
 // define routes
+const overviewRoute = require("./routes/overviewRoute");
 const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
 
-app.get("/", (req, res) => res.render("pages/overview"));
+app.get("/", (req, res) => overviewRoute(req, res));
 app.get("/login", (req, res) => res.render("pages/login"));
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
