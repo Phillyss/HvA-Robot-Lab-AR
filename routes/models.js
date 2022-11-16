@@ -6,7 +6,7 @@ const modelModel = require("../schemas/modelSchema");
 // setup multer: file upload
 const fileStorageEgnine = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, "./appFiles/models/3");
+		cb(null, "./appFiles/gltfModels/4");
 	},
 	filename: (req, file, cb) => {
 		cb(null, Date.now() + "-" + file.originalname);
@@ -42,7 +42,7 @@ router.post(
 			if (req.body.latitude !== "") lat = Number(req.body.latitude);
 
 			const newModel = await modelModel.create({
-				modelid: 3,
+				modelid: 4,
 				userid: 2,
 				name: req.body.name,
 				description: req.body.description,

@@ -125,9 +125,12 @@
 				<ul>
 					<% models.forEach(model => { %>
 					<li>
-						<a href="./edit.html">
+						<a href="/models/<%- model.modelid %>">
 							<div>
-								<img src="img/table.jpeg" alt="thumbnail" />
+								<img
+									src="gltfModels/<%- model.modelid %>/thumbnail.jpg"
+									alt="thumbnail"
+								/>
 							</div>
 							<div>
 								<h2><%= model.name %></h2>
@@ -137,8 +140,9 @@
 							</div>
 							<div>
 								<p>
-									<% let tags = ""; model.tags.forEach(t => { tags =
-									tags.concat(", ", t) }) %> <%= tags %>
+									<% tags = model.tags[0]; for (let i = 1; i <
+									model.tags.length; i++) { tags = tags.concat(", ",
+									model.tags[i]); } %> <%= tags %>
 								</p>
 								<p>Philip van Egmond</p>
 							</div>

@@ -26,6 +26,7 @@ const port = process.env.PORT || 3000;
 // setup express
 app.use(cors());
 app.use(express.static("public"));
+app.use(express.static("appFiles"));
 app.use(express.urlencoded({ extended: true }));
 app.use(partials());
 app.set("view engine", "ejs");
