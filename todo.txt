@@ -1,3 +1,4 @@
 fix thumbnail and mode name upload
 validate form inputs
 dynamic paths model upload
+partials

@@ -9,14 +9,14 @@ require("dotenv").config();
 // DB setup
 const uri = process.env.URI;
 mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
-  console.log("db connected!");
+	console.log("db connected!");
 });
 
 // init express
@@ -34,12 +34,11 @@ app.set("view engine", "ejs");
 const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
 
-const modelModel = require("./schemas/modelSchema");
-
 app.get("/", (req, res) => res.render("pages/overview"));
 app.get("/login", (req, res) => res.render("pages/login"));
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
+app.use((req, res, next) => res.status(404).send("Page not found"));
 
 // succes message
 app.listen(port, () => console.log(`Listening to port: ${port}`));
