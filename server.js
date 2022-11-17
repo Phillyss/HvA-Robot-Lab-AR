@@ -3,6 +3,7 @@ const express = require("express");
 const partials = require("express-partials");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const fs = require("fs");
 const multer = require("multer");
 require("dotenv").config();
 
@@ -34,12 +35,26 @@ app.set("view engine", "ejs");
 // define routes
 const overviewRoute = require("./routes/overviewRoute");
 const userRouter = require("./routes/users");
-const modelRouter = require("./routes/models");
+const modelRouter = require("./routes/models2");
 
 app.get("/", (req, res) => overviewRoute(req, res));
 app.get("/login", (req, res) => res.render("pages/login"));
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
+app.get("/test", (req, res) => {
+	fs.mkdir("./appFiles/gltfModels/5", { recursive: false }, err => {
+		if (err) {
+			if (err.code == "EEXIST") {
+				console.log("Dir already exists");
+				return;
+			}
+		} else {
+			console.log("Dir created");
+		}
+	});
+	res.send("test dir");
+});
+
 app.use((req, res, next) => res.status(404).send("Page not found"));
 
 // succes message

@@ -3,13 +3,26 @@ const router = express.Router();
 const multer = require("multer");
 const fs = require("fs");
 const modelModel = require("../schemas/modelSchema");
+const counterModel = require("../schemas/counterSchema");
 
-//router.use(multer().any());
+// get new model id
+let modelsCounter;
+router.use("/upload", async (req, res, next) => {
+	try {
+		const counter = await counterModel.findOne({ name: "models" });
+		modelsCounter = counter;
+		console.log(modelsCounter.count);
+		next();
+	} catch (err) {
+		console.log(err);
+		next();
+	}
+});
 
 // setup multer: file upload
 const fileStorageEgnine = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, "./appFiles/gltfModels/5");
+		cb(null, `./appFiles/gltfModels/${modelsCounter.count + 1}`);
 	},
 	filename: (req, file, cb) => {
 		cb(null, Date.now() + "-" + file.originalname);
