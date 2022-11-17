@@ -9,9 +9,27 @@ const counterModel = require("../schemas/counterSchema");
 let modelsCounter;
 router.use("/upload", async (req, res, next) => {
 	try {
-		const counter = await counterModel.findOne({ name: "models" });
-		modelsCounter = counter;
-		console.log(modelsCounter.count);
+		if (req.method === "POST") {
+			const counter = await counterModel.findOne({ name: "models" });
+			modelsCounter = counter;
+			console.log(modelsCounter.count);
+
+			// create new model dir
+			fs.mkdir(
+				`./appFiles/gltfModels/${modelsCounter.count + 1}`,
+				{ recursive: false },
+				err => {
+					if (err) {
+						if (err.code == "EEXIST") {
+							console.log("Dir already exists");
+							return;
+						}
+					} else {
+						console.log("Dir created");
+					}
+				}
+			);
+		}
 		next();
 	} catch (err) {
 		console.log(err);

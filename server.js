@@ -42,7 +42,7 @@ app.get("/login", (req, res) => res.render("pages/login"));
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
 app.get("/test", (req, res) => {
-	fs.mkdir("./appFiles/gltfModels/5", { recursive: false }, err => {
+	fs.mkdir("./appFiles/gltfModels/6", { recursive: false }, err => {
 		if (err) {
 			if (err.code == "EEXIST") {
 				console.log("Dir already exists");
