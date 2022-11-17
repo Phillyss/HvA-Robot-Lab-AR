@@ -7,16 +7,19 @@ const counterModel = require("../schemas/counterSchema");
 
 // get new model id
 let modelsCounter;
+let newModelID;
 router.use("/upload", async (req, res, next) => {
 	try {
 		if (req.method === "POST") {
+			// get current models count
 			const counter = await counterModel.findOne({ name: "models" });
 			modelsCounter = counter;
-			console.log(modelsCounter.count);
+			newModelID = modelsCounter.count + 1;
+			//console.log(modelsCounter.count);
 
-			// create new model dir
-			fs.mkdir(
-				`./appFiles/gltfModels/${modelsCounter.count + 1}`,
+			// create new folder for model
+			const newDir = await fs.promises.mkdir(
+				`./appFiles/gltfModels/${newModelID}`,
 				{ recursive: false },
 				err => {
 					if (err) {
@@ -29,6 +32,9 @@ router.use("/upload", async (req, res, next) => {
 					}
 				}
 			);
+
+			// increase model count
+			const udpate = await counter.updateOne({ $inc: { count: 1 } });
 		}
 		next();
 	} catch (err) {
@@ -40,14 +46,16 @@ router.use("/upload", async (req, res, next) => {
 // setup multer: file upload
 const fileStorageEgnine = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, `./appFiles/gltfModels/${modelsCounter.count + 1}`);
+		cb(null, `./appFiles/gltfModels/${newModelID}`);
 	},
 	filename: (req, file, cb) => {
-		cb(null, Date.now() + "-" + file.originalname);
+		cb(null, "thumbnail.jpg");
 	},
 });
 
 const upload = multer({ storage: fileStorageEgnine });
+
+// --- ROUTES ---
 
 // /models: overview page
 router.get("/", (req, res) => {
@@ -68,15 +76,18 @@ router.post(
 	]),
 	async (req, res) => {
 		try {
+			// put tags in array
 			const tagsArray = req.body.tags.split(", ");
 			let long = 0;
 			let lat = 0;
 
+			// set longitude and latitude if values are provided
 			if (req.body.longitude !== "") long = Number(req.body.longitude);
 			if (req.body.latitude !== "") lat = Number(req.body.latitude);
 
+			// upload model info to db
 			const newModel = await modelModel.create({
-				modelid: 4,
+				modelid: newModelID,
 				userid: 2,
 				name: req.body.name,
 				description: req.body.description,
