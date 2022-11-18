@@ -64,7 +64,7 @@ router.get("/", (req, res) => {
 
 // /models/new: upload page
 router.get("/upload", (req, res) => {
-	res.render("pages/upload2");
+	res.render("pages/upload");
 });
 
 // upload new model to db

@@ -35,7 +35,7 @@ app.set("view engine", "ejs");
 // define routes
 const overviewRoute = require("./routes/overviewRoute");
 const userRouter = require("./routes/users");
-const modelRouter = require("./routes/models2");
+const modelRouter = require("./routes/models");
 
 app.get("/", (req, res) => overviewRoute(req, res));
 app.get("/login", (req, res) => res.render("pages/login"));
