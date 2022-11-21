@@ -6,19 +6,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="/stylesheets/styles.css" />
 		<link rel="stylesheet" href="/stylesheets/loginSignup.css" />
-		<script src="/modules/login.js" defer></script>
 		<title>Log In</title>
 	</head>
 	<body>
 		<main>
 			<img src="../img/rlab.jpg" alt="Robot Lab Logo" />
 			<section>
-				<p class="hidden">Email or password incorrect</p>
+				<p class="login"><%- locals.error %></p>
 				<div>
-					<form action="/" type="GET">
+					<form action="/users/login" method="POST">
 						<div>
 							<label for="email">email@hva.nl</label>
-							<input type="text" name="email" id="email" />
+							<input
+								type="text"
+								name="email"
+								id="email"
+								value="<%= locals.email %>"
+							/>
 						</div>
 						<div>
 							<label for="password">password</label>
@@ -26,7 +30,7 @@
 						</div>
 						<button type="submit" class="buttonblue">Log In</button>
 					</form>
-					<a href="/users/new">Create Account</a>
+					<a href="/users/signup">Create Account</a>
 					<a href="./resetpassword.html">Forgot Password</a>
 				</div>
 			</section>

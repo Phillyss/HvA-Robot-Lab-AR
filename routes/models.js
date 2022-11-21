@@ -5,7 +5,7 @@ const fs = require("fs");
 const modelModel = require("../schemas/modelSchema");
 const counterModel = require("../schemas/counterSchema");
 
-// get new model id
+// runs before uploading a new model
 let modelsCounter;
 let newModelID;
 router.use("/upload", async (req, res, next) => {
@@ -15,7 +15,6 @@ router.use("/upload", async (req, res, next) => {
 			const counter = await counterModel.findOne({ name: "models" });
 			modelsCounter = counter;
 			newModelID = modelsCounter.count + 1;
-			//console.log(modelsCounter.count);
 
 			// create new folder for model
 			const newDir = await fs.promises.mkdir(
@@ -62,7 +61,7 @@ router.get("/", (req, res) => {
 	res.redirect("/");
 });
 
-// /models/new: upload page
+// /models/upload: upload page
 router.get("/upload", (req, res) => {
 	res.render("pages/upload");
 });

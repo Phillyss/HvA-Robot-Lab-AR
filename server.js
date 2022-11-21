@@ -1,6 +1,7 @@
 // require packages
 const express = require("express");
 const partials = require("express-partials");
+const session = require("express-session");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const fs = require("fs");
@@ -24,6 +25,16 @@ db.once("open", () => {
 const app = express();
 const port = process.env.PORT || 3000;
 
+// setup sessions
+app.use(
+	session({
+		secret: "session encryption key",
+		cookie: { maxAge: 3000 },
+		resave: false,
+		saveUninitialized: false,
+	})
+);
+
 // setup express
 app.use(cors());
 app.use(express.static("public"));
@@ -38,22 +49,9 @@ const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
 
 app.get("/", (req, res) => overviewRoute(req, res));
-app.get("/login", (req, res) => res.render("pages/login"));
+//app.get("/login", (req, res) => res.render("pages/login"));
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
-app.get("/test", (req, res) => {
-	fs.mkdir("./appFiles/gltfModels/6", { recursive: false }, err => {
-		if (err) {
-			if (err.code == "EEXIST") {
-				console.log("Dir already exists");
-				return;
-			}
-		} else {
-			console.log("Dir created");
-		}
-	});
-	res.send("test dir");
-});
 
 app.use((req, res, next) => res.status(404).send("Page not found"));
 

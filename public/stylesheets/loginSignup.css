@@ -48,6 +48,10 @@ p.signup {
 	top: 415px;
 }
 
+p.login {
+	top: 286px;
+}
+
 form input {
 	width: 100%;
 	height: 42px;

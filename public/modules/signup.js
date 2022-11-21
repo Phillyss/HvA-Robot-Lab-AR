@@ -26,8 +26,8 @@ function submit(e) {
 
 	if (error.innerHTML.length > 0) {
 		e.preventDefault();
-		create.style.marginTop = "42px";
-		error.classList.remove("hidden");
+		//create.style.marginTop = "42px";
+		//error.classList.remove("hidden");
 	}
 }
 

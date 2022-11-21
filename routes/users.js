@@ -7,13 +7,47 @@ router.get("/", (req, res) => {
 	res.render("pages/edit.ejs");
 });
 
-// /users/new: signup
-router.get("/new", (req, res) => {
+// /users/login
+router.get("/login", (req, res) => {
+	res.render("pages/login");
+});
+
+router.post("/login", (req, res) => {
+	const { email, password } = req.body;
+	if (email && password) {
+		if (req.session.authenticated) {
+			res.json(req.session);
+		} else {
+			if (password === "123123") {
+				req.session.authenticated = true;
+				req.session.user = {
+					email,
+					password,
+				};
+				res.json(req.session);
+			} else {
+				res.render("pages/login", {
+					email: req.body.email,
+					error: "Incorrect email or password",
+				});
+			}
+		}
+	} else {
+		res.render("pages/login", {
+			email: req.body.email,
+			error: "Incorrect email or password",
+		});
+	}
+	//res.send(200);
+});
+
+// /users/signup: signup
+router.get("/signup", (req, res) => {
 	res.render("pages/signup", { mail: "email@hva.nl" });
 });
 
-// upload new user to db
-router.post("/new", async (req, res) => {
+// upload signup user to db
+router.post("/signup", async (req, res) => {
 	try {
 		const isValid = true;
 		if (isValid) {
