@@ -2,6 +2,7 @@
 const express = require("express");
 const partials = require("express-partials");
 const session = require("express-session");
+const store = new session.MemoryStore();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const fs = require("fs");
@@ -49,9 +50,12 @@ const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
 
 app.get("/", (req, res) => overviewRoute(req, res));
-//app.get("/login", (req, res) => res.render("pages/login"));
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
+
+// redirects
+app.get("/login", (req, res) => res.redirect("users/login"));
+app.get("/signup", (req, res) => res.redirect("users/signup"));
 
 app.use((req, res, next) => res.status(404).send("Page not found"));
 

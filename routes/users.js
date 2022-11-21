@@ -12,13 +12,15 @@ router.get("/login", (req, res) => {
 	res.render("pages/login");
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
 	const { email, password } = req.body;
 	if (email && password) {
 		if (req.session.authenticated) {
 			res.json(req.session);
 		} else {
-			if (password === "123123") {
+			// check db for input email and compare passwords > if match authenticate user
+			const requestedUser = await userModel.findOne({ email: req.body.email });
+			if (requestedUser.password === password) {
 				req.session.authenticated = true;
 				req.session.user = {
 					email,

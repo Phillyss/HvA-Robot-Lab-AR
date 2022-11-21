@@ -115,6 +115,10 @@ router
 		res.send(`delete ${req.params.id}`);
 	});
 
+router.get("/:id", (req, res) => {
+	res.render("pages/detail");
+});
+
 // run before router
 // router.param("id", (req, res, next, id) => {
 // 	console.log(id);
