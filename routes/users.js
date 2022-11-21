@@ -49,8 +49,10 @@ router.get("/signup", (req, res) => {
 // upload signup user to db
 router.post("/signup", async (req, res) => {
 	try {
-		const isValid = true;
-		if (isValid) {
+		let error = "";
+		error = validateSignupForm(req, error);
+
+		if (error.length === 0) {
 			const newUser = await userModel.create({
 				id: 2,
 				name: req.body.fullname,
@@ -63,6 +65,7 @@ router.post("/signup", async (req, res) => {
 			res.render("pages/signup", {
 				email: req.body.email,
 				name: req.body.fullname,
+				error: error,
 			});
 		}
 	} catch (err) {
@@ -82,6 +85,27 @@ router
 	.delete((req, res) => {
 		res.send(`delete ${req.params.id}`);
 	});
+
+// validate sign up form
+function validateSignupForm(req, error) {
+	if (req.body.password !== req.body.confirm) {
+		error = "Passwords do not match";
+	}
+
+	if (req.body.password.length < 6) {
+		error = "Password is less than 6 characters";
+	}
+
+	if (!req.body.fullname.includes(" ")) {
+		error = "Use your full name";
+	}
+
+	if (!req.body.email.includes("@hva.nl")) {
+		error = "Use a HvA email";
+	}
+
+	return error;
+}
 
 // run before router
 // router.param("id", (req, res, next, id) => {
