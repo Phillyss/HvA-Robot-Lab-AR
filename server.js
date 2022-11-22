@@ -2,7 +2,7 @@
 const express = require("express");
 const partials = require("express-partials");
 const session = require("express-session");
-const store = new session.MemoryStore();
+const MongoDBSession = require("connect-mongodb-session")(session);
 const mongoose = require("mongoose");
 const cors = require("cors");
 const fs = require("fs");
@@ -22,6 +22,11 @@ db.once("open", () => {
 	console.log("db connected!");
 });
 
+const store = new MongoDBSession({
+	uri: uri,
+	collection: "sessions",
+});
+
 // init express
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,11 +35,20 @@ const port = process.env.PORT || 3000;
 app.use(
 	session({
 		secret: "session encryption key",
-		cookie: { maxAge: 3000 },
 		resave: false,
 		saveUninitialized: false,
+		store: store,
 	})
 );
+
+// middleware to force login on certain pages
+const authenticated = (req, res, next) => {
+	if (req.session.authenticated) {
+		next();
+	} else {
+		res.redirect("/users/login");
+	}
+};
 
 // setup express
 app.use(cors());
@@ -49,7 +63,7 @@ const overviewRoute = require("./routes/overviewRoute");
 const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
 
-app.get("/", (req, res) => overviewRoute(req, res));
+app.get("/", authenticated, (req, res) => overviewRoute(req, res));
 app.use("/users", userRouter);
 app.use("/models", modelRouter);
 

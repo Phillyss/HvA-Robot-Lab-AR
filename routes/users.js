@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const userModel = require("../schemas/userSchema");
+const counterModel = require("../schemas/counterSchema");
+const bcrypt = require("bcryptjs");
 
 // /users page
 router.get("/", (req, res) => {
@@ -13,26 +15,30 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+	// get form data and requested email from db
 	const { email, password } = req.body;
-	if (email && password) {
-		if (req.session.authenticated) {
-			res.json(req.session);
+	const requestedUser = await userModel.findOne({ email });
+
+	if (!requestedUser) {
+		return res.redirect("/login");
+	}
+
+	if (requestedUser) {
+		// check db for input email and compare passwords > if match authenticate user
+		const isMatch = await bcrypt.compare(password, requestedUser.password);
+		if (isMatch) {
+			req.session.authenticated = true;
+			req.session.user = {
+				email,
+				id: requestedUser.id,
+				name: requestedUser.name,
+			};
+			res.redirect("/");
 		} else {
-			// check db for input email and compare passwords > if match authenticate user
-			const requestedUser = await userModel.findOne({ email: req.body.email });
-			if (requestedUser.password === password) {
-				req.session.authenticated = true;
-				req.session.user = {
-					email,
-					password,
-				};
-				res.json(req.session);
-			} else {
-				res.render("pages/login", {
-					email: req.body.email,
-					error: "Incorrect email or password",
-				});
-			}
+			res.render("pages/login", {
+				email: req.body.email,
+				error: "Incorrect email or password",
+			});
 		}
 	} else {
 		res.render("pages/login", {
@@ -45,30 +51,53 @@ router.post("/login", async (req, res) => {
 
 // /users/signup: signup
 router.get("/signup", (req, res) => {
-	res.render("pages/signup", { mail: "email@hva.nl" });
+	res.render("pages/signup");
 });
 
-// upload signup user to db
+// upload new user to db
 router.post("/signup", async (req, res) => {
 	try {
-		let error = "";
-		error = validateSignupForm(req, error);
+		// get form data
+		const { email, fullname, password, confirm } = req.body;
 
-		if (error.length === 0) {
-			const newUser = await userModel.create({
-				id: 2,
-				name: req.body.fullname,
-				email: req.body.email,
-				password: req.body.password,
-			});
-			const save = await newUser.save();
-			res.redirect("/users/3");
+		// check if email already exists in db
+		const user = await userModel.findOne({ email });
+		if (user) {
+			return res.render("pages/signup", { error: "Email already exists" });
 		} else {
-			res.render("pages/signup", {
-				email: req.body.email,
-				name: req.body.fullname,
-				error: error,
-			});
+			// form validation
+			let error = "";
+			error = validateSignupForm(req, error);
+
+			// if form valid
+			if (error.length === 0) {
+				// get next user id
+				const counter = await counterModel.findOne({ name: "users" });
+				const nextID = counter.count + 1;
+
+				// encrypt password
+				const hashedPsw = await bcrypt.hash(password, 12);
+
+				// upload user to db
+				const newUser = await userModel.create({
+					id: nextID,
+					name: fullname,
+					email: email,
+					password: hashedPsw,
+				});
+				const save = await newUser.save();
+
+				// increase user count
+				const udpate = await counter.updateOne({ $inc: { count: 1 } });
+				res.redirect("/users/login");
+			} else {
+				// if form invalid rerender signup page
+				res.render("pages/signup", {
+					email: email,
+					name: fullname,
+					error: error,
+				});
+			}
 		}
 	} catch (err) {
 		console.log(err);
