@@ -18,7 +18,7 @@
 					<li><a href="/">Manuals</a></li>
 					<li><a href="/">Troubleshooting</a></li>
 				</ul>
-				<button type="button"><img src="" /></button>
+				<a href="/users/logout">Log Out</a>
 			</nav>
 		</header>
 
@@ -144,7 +144,7 @@
 									model.tags.length; i++) { tags = tags.concat(", ",
 									model.tags[i]); } %> <%= tags %>
 								</p>
-								<p>Philip van Egmond</p>
+								<p><%= model.username %></p>
 							</div>
 						</a>
 					</li>

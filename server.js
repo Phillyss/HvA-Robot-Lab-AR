@@ -67,7 +67,7 @@ const modelRouter = require("./routes/models");
 
 app.get("/", authenticated, (req, res) => overviewRoute(req, res));
 app.use("/users", userRouter);
-app.use("/models", modelRouter);
+app.use("/models", authenticated, modelRouter);
 
 // redirects
 app.get("/login", (req, res) => res.redirect("users/login"));

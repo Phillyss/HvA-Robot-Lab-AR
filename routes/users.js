@@ -104,6 +104,17 @@ router.post("/signup", async (req, res) => {
 	}
 });
 
+router.get("/logout", (req, res) => {
+	res.render("pages/logout");
+});
+
+router.post("/logout", (req, res) => {
+	req.session.destroy(err => {
+		if (err) console.log(err);
+		res.redirect("/users/login");
+	});
+});
+
 // /users/userid
 router
 	.route("/:id")

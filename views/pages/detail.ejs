@@ -36,22 +36,25 @@
 						<h2>Information</h2>
 						<div>
 							<p>Creator:</p>
-							<p>Model Name</p>
+							<p><%= creator.name %></p>
 						</div>
 						<div>
 							<p>Date:</p>
-							<p>Model Name</p>
+							<p><%- model.date %></p>
 						</div>
 						<div>
 							<p>Tags:</p>
-							<p>Model Name</p>
+							<p>
+								<% tags = model.tags[0]; for (let i = 1; i < model.tags.length;
+								i++) { tags = tags.concat(", ", model.tags[i]); } %> <%= tags %>
+							</p>
 						</div>
 					</section>
 				</section>
 
 				<section id="formcon">
 					<section class="thumbnailcon fset">
-						<img src="/gltfModels/1/thumbnail.jpg" alt="thumbnail" />
+						<img src="/gltfModels/20/thumbnail.jpg" alt="qrcode" />
 					</section>
 					<section class="fset">
 						<h2>Description</h2>

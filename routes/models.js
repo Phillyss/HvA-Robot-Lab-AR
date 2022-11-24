@@ -4,6 +4,7 @@ const multer = require("multer");
 const fs = require("fs");
 const modelModel = require("../schemas/modelSchema");
 const counterModel = require("../schemas/counterSchema");
+const userModel = require("../schemas/userSchema");
 
 // runs before uploading a new model
 let modelsCounter;
@@ -84,10 +85,18 @@ router.post(
 			if (req.body.longitude !== "") long = Number(req.body.longitude);
 			if (req.body.latitude !== "") lat = Number(req.body.latitude);
 
+			// get current date
+			const now = new Date();
+			const date = `${now.getDate()}/${
+				now.getMonth() + 1
+			}/${now.getFullYear()}`;
+
 			// upload model info to db
 			const newModel = await modelModel.create({
 				modelid: newModelID,
-				userid: 2,
+				userid: req.session.user.id,
+				username: req.session.user.name,
+				date: date,
 				name: req.body.name,
 				description: req.body.description,
 				type: req.body.type,
@@ -118,7 +127,14 @@ router
 router.get("/:id", async (req, res) => {
 	const model = await modelModel.findOne({ modelid: req.params.id });
 	if (model) {
-		res.render("pages/detail", { model: model });
+		const creator = await userModel.findOne({ id: model.userid });
+		if (!creator) {
+			console.log(
+				`model id:${model.modelid} exists without its user id:${model.userid} in database. please delete the model from the database.`
+			);
+			res.redirect("/");
+		}
+		res.render("pages/detail", { model: model, creator: creator });
 	} else {
 		res.render("pages/404");
 	}
