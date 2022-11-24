@@ -115,14 +115,13 @@ router
 		res.send(`delete ${req.params.id}`);
 	});
 
-router.get("/:id", (req, res) => {
-	res.render("pages/detail");
+router.get("/:id", async (req, res) => {
+	const model = await modelModel.findOne({ modelid: req.params.id });
+	if (model) {
+		res.render("pages/detail", { model: model });
+	} else {
+		res.render("pages/404");
+	}
 });
-
-// run before router
-// router.param("id", (req, res, next, id) => {
-// 	console.log(id);
-// 	next();
-// });
 
 module.exports = router;

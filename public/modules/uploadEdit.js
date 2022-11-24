@@ -7,7 +7,8 @@ const longCon = document.querySelector("#longcon");
 const latCon = document.querySelector("#latcon");
 const delButton = document.querySelector("#buttoncon .buttonpink");
 const delPopup = document.querySelector(".delpopup");
-const cancelButton = document.querySelector(".delpopup .buttonblue");
+const deleteCancel = document.querySelector(".delpopup .buttonblue");
+const cancelMain = document.querySelector("#buttoncon .buttongrey");
 
 function hideEl(el) {
 	el.classList.add("hidden");
@@ -33,4 +34,7 @@ openTagsButton.addEventListener("click", () => unhideEl(tagsPopup));
 markerCB.addEventListener("change", checkARType);
 gpsCB.addEventListener("change", checkARType);
 delButton.addEventListener("click", () => unhideEl(delPopup));
-cancelButton.addEventListener("click", () => hideEl(delPopup));
+deleteCancel.addEventListener("click", () => hideEl(delPopup));
+cancelMain.addEventListener("click", () => {
+	window.location.href = "/";
+});

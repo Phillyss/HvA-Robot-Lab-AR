@@ -32,9 +32,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // setup sessions
+const secret = process.env.SECRET; // A9Mq1EHM98vGZbk4h8eRzEwZYO5dhlwH
 app.use(
 	session({
-		secret: "session encryption key",
+		secret: secret,
+		cookie: { maxAge: 2592000000 },
 		resave: false,
 		saveUninitialized: false,
 		store: store,

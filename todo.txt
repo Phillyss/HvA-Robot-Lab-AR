@@ -1,7 +1,6 @@
-fix thumbnail and mode name upload
 validate form inputs
-dynamic paths model upload
 partials
 multer model upload file names and types
 qr code generator
 email authentication
+delete

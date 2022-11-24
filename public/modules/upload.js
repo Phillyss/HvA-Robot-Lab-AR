@@ -11,6 +11,7 @@ const gpsCB = document.querySelector("#gps");
 const longCon = document.querySelector("#longcon");
 const latCon = document.querySelector("#latcon");
 const cancelButton = document.querySelector(".delpopup .buttonblue");
+const cancelMain = document.querySelector("#buttoncon button");
 
 function hideEl(el) {
 	el.classList.add("hidden");
@@ -74,4 +75,7 @@ gpsCB.addEventListener("change", checkARType);
 popupAcceptButton.addEventListener("click", () => {
 	setTags();
 	hideEl(tagsPopup);
+});
+cancelMain.addEventListener("click", () => {
+	window.location.href = "/";
 });
