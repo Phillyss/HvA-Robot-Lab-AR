@@ -63,7 +63,6 @@ function setThumbnailBackground() {
 
 function updateModelName() {
 	const file = this.files[0];
-	console.log(file);
 	document.querySelector("fieldset p").innerHTML = file.name;
 }
 

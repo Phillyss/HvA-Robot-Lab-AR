@@ -6,6 +6,7 @@ const modelSchema = new mongoose.Schema({
 	username: { type: String, require: true },
 	date: { type: String, require: true },
 	name: { type: String, require: true },
+	thumbnail: { type: String },
 	description: { type: String, require: true },
 	type: { type: String, require: true },
 	tags: { type: [{ type: String }] },

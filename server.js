@@ -68,6 +68,14 @@ const modelRouter = require("./routes/models");
 app.get("/", authenticated, (req, res) => overviewRoute(req, res));
 app.use("/users", userRouter);
 app.use("/models", authenticated, modelRouter);
+app.get("/deletemodels", async (req, res) => {
+	const modelModel = require("./schemas/modelSchema");
+	const counterModel = require("./schemas/counterSchema");
+	const modelCounter = await counterModel.findOne({ name: "models" });
+	const delModels = await modelModel.deleteMany({});
+	const resetCounter = await counterModel.updateOne({ count: 0 });
+	res.send("models deleted");
+});
 
 // redirects
 app.get("/login", (req, res) => res.redirect("users/login"));

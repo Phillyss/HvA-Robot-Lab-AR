@@ -49,7 +49,9 @@ const fileStorageEgnine = multer.diskStorage({
 		cb(null, `./appFiles/gltfModels/${newModelID}`);
 	},
 	filename: (req, file, cb) => {
-		cb(null, "thumbnail.jpg");
+		const extArr = file.originalname.split(".");
+		const ext = extArr[extArr.length - 1];
+		cb(null, `${file.fieldname}.${ext}`);
 	},
 });
 
@@ -91,6 +93,13 @@ router.post(
 				now.getMonth() + 1
 			}/${now.getFullYear()}`;
 
+			// set thumbnail file path
+			let thumbnailFilename;
+			const directory = await fs.promises.readdir(
+				`./appFiles/gltfModels/${newModelID}`
+			);
+			thumbnailFilename = directory[1];
+
 			// upload model info to db
 			const newModel = await modelModel.create({
 				modelid: newModelID,
@@ -98,6 +107,7 @@ router.post(
 				username: req.session.user.name,
 				date: date,
 				name: req.body.name,
+				thumbnail: thumbnailFilename,
 				description: req.body.description,
 				type: req.body.type,
 				tags: tagsArray,
