@@ -5,3 +5,5 @@ email authentication
 delete
 404
 Overview - progressive enhancement
+- Generate QR-code
+- View AR model
