@@ -89,9 +89,9 @@ router.post(
 
 			// get current date
 			const now = new Date();
-			const date = `${now.getDate()}/${
+			const date = `${now.getDate()} / ${
 				now.getMonth() + 1
-			}/${now.getFullYear()}`;
+			} / ${now.getFullYear()}`;
 
 			// set thumbnail file path
 			let thumbnailFilename;
