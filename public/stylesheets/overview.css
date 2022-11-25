@@ -93,11 +93,6 @@ aside input[type="text"] {
 }
 
 /* --- Content ---  */
-section {
-	width: 1020px;
-	margin-right: 60px;
-}
-
 h1 {
 	margin-bottom: 18px;
 }
@@ -106,12 +101,12 @@ main ul {
 	display: flex;
 	flex-wrap: wrap;
 	max-width: 100%;
-	justify-content: space-between;
 }
 
 main li {
 	position: relative;
-	margin-bottom: 60px;
+	margin-bottom: 36px;
+	margin-right: 36px;
 	overflow: hidden;
 	border-radius: 12px;
 	box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
@@ -210,14 +205,4 @@ main li:hover div:nth-of-type(2) {
 
 main li:hover div:nth-of-type(3) {
 	bottom: 44px;
-}
-
-@media (max-width: 1380px) {
-	section {
-		width: 660px;
-	}
-
-	main {
-		justify-content: space-evenly;
-	}
 }

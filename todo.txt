@@ -1,6 +1,5 @@
 validate form inputs
 partials
-multer model upload file names and types
 qr code generator
 email authentication
 delete
