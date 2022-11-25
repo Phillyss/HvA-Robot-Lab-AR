@@ -136,7 +136,7 @@ router.get("/:id", async (req, res) => {
 		}
 		res.render("pages/detail", { model: model, creator: creator });
 	} else {
-		res.render("pages/404");
+		res.redirect("/");
 	}
 });
 
