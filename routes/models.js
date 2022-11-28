@@ -5,6 +5,7 @@ const fs = require("fs");
 const modelModel = require("../schemas/modelSchema");
 const counterModel = require("../schemas/counterSchema");
 const userModel = require("../schemas/userSchema");
+const qrcode = require("qrcode");
 
 // runs before uploading a new model
 let modelsCounter;
@@ -144,7 +145,12 @@ router.get("/:id", async (req, res) => {
 			);
 			res.redirect("/");
 		}
-		res.render("pages/detail", { model: model, creator: creator });
+
+		// generate qrcode
+		const newURL = `http://localhost:3000/models/${req.params.id}`;
+		const qr = await qrcode.toDataURL(newURL);
+
+		res.render("pages/detail", { model: model, creator: creator, qr: qr });
 	} else {
 		res.redirect("/");
 	}

@@ -1,9 +1,10 @@
 validate form inputs
+Fix GPS display
 partials
 qr code generator
 email authentication
 delete
 404
 Overview - progressive enhancement
-- Generate QR-code
+- Change qr url
 - View AR model
