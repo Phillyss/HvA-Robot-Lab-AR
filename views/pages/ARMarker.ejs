@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+		/>
+		<title><%= model.name %></title>
+		<link rel="stylesheet" href="/stylesheets/ar.css" />
+	</head>
+	<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+	<script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+	<script src="/modules/ar.js" defer></script>
+
+	<body style="margin: 0px; overflow: hidden">
+		<header>
+			<nav>
+				<ul>
+					<li><button class="selectedModel"><%= model.name %></button></li>
+					<li><button>Model Info</button></li>
+				</ul>
+				<ul>
+					<li><button>?</button></li>
+					<li><button>?</button></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main>
+			<!-- Info -->
+			<section>
+				<h2>Creator</h2>
+				<p><%= model.username %></p>
+
+				<h2>Tags</h2>
+				<ul>
+					<% for(let i = 0; i < model.tags.length; i++) { %>
+					<li><%- model.tags[i] %></li>
+					<% } %>
+				</ul>
+
+				<h2>Description</h2>
+				<p><%= model.description %></p>
+			</section>
+
+			<!-- Help -->
+			<section>
+				<button>X</button>
+				<img src="markers/gestures.jpg" />
+			</section>
+
+			<!-- Settings -->
+			<section>
+				<ul>
+					<li><button>?</button></li>
+					<li><button>?</button></li>
+					<li><button>?</button></li>
+					<li><button>?</button></li>
+				</ul>
+			</section>
+		</main>
+
+		<a-scene
+			vr-mode-ui="enabled: false"
+			embedded
+			renderer="logarithmicDepthBuffer: true"
+			arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth: 1920; sourceHeight: 1080;"
+		>
+			<a-assets>
+				<a-asset-item
+					id="animated-asset"
+					src="/gltfModels/<%- model.modelid %>/model.gltf"
+				></a-asset-item>
+			</a-assets>
+
+			<a-marker id="animated-marker" type="barcode" value="6" size="0.3">
+				<a-entity gltf-model="#animated-asset" scale="2 2 2" rotation="0 0 0">
+				</a-entity>
+			</a-marker>
+
+			<a-entity camera></a-entity>
+		</a-scene>
+	</body>
+</html>

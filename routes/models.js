@@ -6,6 +6,7 @@ const modelModel = require("../schemas/modelSchema");
 const counterModel = require("../schemas/counterSchema");
 const userModel = require("../schemas/userSchema");
 const qrcode = require("qrcode");
+const { workerData } = require("worker_threads");
 
 // runs before uploading a new model
 let modelsCounter;
@@ -135,8 +136,21 @@ router
 		res.send(`delete ${req.params.id}`);
 	});
 
+// render AR page
+router.get("/:id/ar", async (req, res) => {
+	const model = await modelModel.findOne({ modelid: req.params.id });
+	if (model) {
+		//res.send(model);
+		res.render("pages/ARMarker", { model });
+	} else {
+		res.redirect("/");
+	}
+});
+
+// render model detail page
 router.get("/:id", async (req, res) => {
 	const model = await modelModel.findOne({ modelid: req.params.id });
+	// check if model and user exist
 	if (model) {
 		const creator = await userModel.findOne({ id: model.userid });
 		if (!creator) {
