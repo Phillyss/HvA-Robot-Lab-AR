@@ -109,7 +109,6 @@ function checkTap(event) {
 
 	// close settings when AR field is tapped
 	if (settingsOpen) {
-		console.log(event.target);
 		if (
 			event.target !== document.querySelector("nav") &&
 			event.target.tagName !== "BUTTON"

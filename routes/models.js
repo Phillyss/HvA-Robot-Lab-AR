@@ -140,8 +140,11 @@ router
 router.get("/:id/ar", async (req, res) => {
 	const model = await modelModel.findOne({ modelid: req.params.id });
 	if (model) {
-		//res.send(model);
-		res.render("pages/ARMarker", { model });
+		if (model.type === "marker") {
+			res.render("pages/ARMarker", { model });
+		} else {
+			res.render("pages/arGPS", { model });
+		}
 	} else {
 		res.redirect("/");
 	}
@@ -161,7 +164,7 @@ router.get("/:id", async (req, res) => {
 		}
 
 		// generate qrcode
-		const newURL = `http://localhost:3000/models/${req.params.id}`;
+		const newURL = `http://localhost:3000/models/${req.params.id}/ar`;
 		const qr = await qrcode.toDataURL(newURL);
 
 		res.render("pages/detail", { model: model, creator: creator, qr: qr });
