@@ -3,6 +3,7 @@ const router = express.Router();
 const userModel = require("../schemas/userSchema");
 const counterModel = require("../schemas/counterSchema");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 
 // /users page
 router.get("/", (req, res) => {
@@ -19,12 +20,8 @@ router.post("/login", async (req, res) => {
 	const { email, password } = req.body;
 	const requestedUser = await userModel.findOne({ email });
 
-	if (!requestedUser) {
-		return res.redirect("/login");
-	}
-
 	if (requestedUser) {
-		// check db for input email and compare passwords > if match authenticate user
+		// check db for input email and compare passwords > if match log in user
 		const isMatch = await bcrypt.compare(password, requestedUser.password);
 		if (isMatch) {
 			req.session.authenticated = true;
@@ -46,7 +43,6 @@ router.post("/login", async (req, res) => {
 			error: "Incorrect email or password",
 		});
 	}
-	//res.send(200);
 });
 
 // /users/signup: signup
@@ -58,7 +54,7 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res) => {
 	try {
 		// get form data
-		const { email, fullname, password, confirm } = req.body;
+		const { email, fullname, password } = req.body;
 
 		// check if email already exists in db
 		const user = await userModel.findOne({ email });
@@ -89,7 +85,11 @@ router.post("/signup", async (req, res) => {
 
 				// increase user count
 				const udpate = await counter.updateOne({ $inc: { count: 1 } });
-				res.redirect("/users/login");
+
+				// email authentication
+				authenticateMail(newUser);
+
+				res.redirect("/users/confirm");
 			} else {
 				// if form invalid rerender signup page
 				res.render("pages/signup", {
@@ -102,6 +102,11 @@ router.post("/signup", async (req, res) => {
 	} catch (err) {
 		console.log(err);
 	}
+});
+
+// confirm email page
+router.get("/confirm", (req, res) => {
+	res.render("pages/confirm");
 });
 
 router.get("/logout", (req, res) => {
@@ -147,6 +152,15 @@ function validateSignupForm(req, error) {
 	}
 
 	return error;
+}
+
+// send authentication email
+async function sendAuthMail(newUser) {
+	const hash = crypto.randomBytes(20).toString("hex");
+
+	// store hash in db
+
+	// send email
 }
 
 // run before router
