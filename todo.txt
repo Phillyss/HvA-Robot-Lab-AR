@@ -1,17 +1,6 @@
 validate form inputs
 partials
-email authentication
 delete
 404
 auth checks
 Overview - progressive enhancement
-
-- redi to confirm X
-- generate hash
-- store hash in db with user id
-- send email with url including hash
-- on page check if hash is in db
-- if yes set user to active
-- delete hash from db
-
-Login: add active check

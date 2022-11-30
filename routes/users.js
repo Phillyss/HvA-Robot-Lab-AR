@@ -23,23 +23,33 @@ router.post("/login", async (req, res) => {
 	const requestedUser = await userModel.findOne({ email });
 
 	if (requestedUser) {
-		// check db for input email and compare passwords > if match log in user
-		const isMatch = await bcrypt.compare(password, requestedUser.password);
-		if (isMatch) {
-			req.session.authenticated = true;
-			req.session.user = {
-				email,
-				id: requestedUser.id,
-				name: requestedUser.name,
-			};
-			res.redirect("/");
+		if (requestedUser.active) {
+			// check db for input email and compare passwords > if match log in user
+			const isMatch = await bcrypt.compare(password, requestedUser.password);
+			if (isMatch) {
+				req.session.authenticated = true;
+				req.session.user = {
+					email,
+					id: requestedUser.id,
+					name: requestedUser.name,
+				};
+				res.redirect("/");
+			} else {
+				// if password incorrect
+				res.render("pages/login", {
+					email: req.body.email,
+					error: "Incorrect email or password",
+				});
+			}
 		} else {
+			// if email unauthorised
 			res.render("pages/login", {
 				email: req.body.email,
 				error: "Incorrect email or password",
 			});
 		}
 	} else {
+		// if user does not exist
 		res.render("pages/login", {
 			email: req.body.email,
 			error: "Incorrect email or password",
