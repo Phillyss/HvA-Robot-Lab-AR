@@ -5,6 +5,7 @@ const counterModel = require("../schemas/counterSchema");
 const authModel = require("../schemas/authSchema");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 
 // /users page
 router.get("/", (req, res) => {
@@ -105,9 +106,33 @@ router.post("/signup", async (req, res) => {
 	}
 });
 
+// email confirmed page
+router.get("/confirm/:hash", async (req, res) => {
+	// check if entered hash exists in db
+	const hash = req.params.hash;
+	const authRequest = await authModel.findOne({ hash: hash });
+	if (authRequest) {
+		// if hash exists set user to active and remove hash from db
+		const update = await userModel.updateOne(
+			{ id: authRequest.userid },
+			{ $set: { active: true } }
+		);
+
+		const del = await authRequest.delete();
+
+		res.render("pages/confirm", { msg: "Email confirmed succesfully!" });
+	} else {
+		res.redirect("/users/login");
+	}
+});
+
 // confirm email page
 router.get("/confirm", (req, res) => {
-	res.render("pages/confirm");
+	res.render("pages/confirm", {
+		msg: `Welcome! <br />
+					<br />
+					We've send you an email. Please verify your account before loging in.`,
+	});
 });
 
 router.get("/logout", (req, res) => {
@@ -133,6 +158,8 @@ router
 	.delete((req, res) => {
 		res.send(`delete ${req.params.id}`);
 	});
+
+// --------- functions
 
 // validate sign up form
 function validateSignupForm(req, error) {
@@ -165,15 +192,35 @@ async function sendAuthMail(newUser) {
 		userid: newUser.id,
 	});
 
-	// send email
+	// email setup
+	nodemailer.createTestAccount((err, account) => {
+		let transporter = nodemailer.createTransport({
+			host: "smtp.ethereal.email",
+			port: 587,
+			secure: false,
+			auth: {
+				user: account.user,
+				pass: account.pass,
+			},
+		});
 
-	return hash;
+		// mail content: put user hash into url
+		const mailData = {
+			from: account.user,
+			to: newUser.email,
+			subject: "Confirm Robot Lab AR Account",
+			html: `Hey ${newUser.name}! <br /> Press the following link to confirm your Robot Lab AR account:<br /> 
+			<a href="http://localhost:3000/users/confirm/${hash}">http://localhost:3000/users/confirm/${hash}</a>`,
+		};
+
+		transporter.sendMail(mailData, (err, info) => {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(nodemailer.getTestMessageUrl(info));
+			}
+		});
+	});
 }
-
-// run before router
-// router.param("id", (req, res, next, id) => {
-// 	console.log(id);
-// 	next();
-// });
 
 module.exports = router;

@@ -10,13 +10,9 @@
 	</head>
 	<body>
 		<main>
-			<img src="../img/rlab.jpg" alt="Robot Lab Logo" />
+			<img src="/img/rlab.jpg" alt="Robot Lab Logo" />
 			<section class="confirm">
-				<p class="confirm">
-					Welcome! <br />
-					<br />
-					We've send you an email. Please verify your account before loging in.
-				</p>
+				<p class="confirm"><%- locals.msg %></p>
 				<a href="/users/login" class="buttonblue confirm">To Log In</a>
 			</section>
 		</main>
