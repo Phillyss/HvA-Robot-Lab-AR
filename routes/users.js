@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userModel = require("../schemas/userSchema");
 const counterModel = require("../schemas/counterSchema");
+const authModel = require("../schemas/authSchema");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 
@@ -86,8 +87,8 @@ router.post("/signup", async (req, res) => {
 				// increase user count
 				const udpate = await counter.updateOne({ $inc: { count: 1 } });
 
-				// email authentication
-				authenticateMail(newUser);
+				// send email authentication
+				sendAuthMail(newUser);
 
 				res.redirect("/users/confirm");
 			} else {
@@ -159,8 +160,14 @@ async function sendAuthMail(newUser) {
 	const hash = crypto.randomBytes(20).toString("hex");
 
 	// store hash in db
+	const newAuth = await authModel.create({
+		hash: hash,
+		userid: newUser.id,
+	});
 
 	// send email
+
+	return hash;
 }
 
 // run before router
