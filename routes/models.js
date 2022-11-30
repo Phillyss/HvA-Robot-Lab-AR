@@ -124,17 +124,21 @@ router.post(
 	}
 );
 
-router
-	.route("/:id/edit")
-	.get((req, res) => {
-		res.render("pages/edit");
-	})
-	.put((req, res) => {
-		res.send(`update ${req.params.id}`);
-	})
-	.delete((req, res) => {
-		res.send(`delete ${req.params.id}`);
-	});
+// edit model page
+router.get("/:id/edit", async (req, res) => {
+	const model = await modelModel.findOne({ modelid: req.params.id });
+
+	// if model exists and user is creator > render edit page
+	if (model) {
+		if (req.session.user.id === model.userid) {
+			res.render("pages/edit", { model: model });
+		} else {
+			res.redirect("back");
+		}
+	} else {
+		res.redirect("back");
+	}
+});
 
 // render AR page
 router.get("/:id/ar", async (req, res) => {

@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="/stylesheets/styles.css" />
 		<link rel="stylesheet" href="/stylesheets/uploadEdit.css" />
 		<title>Edit Model</title>
-		<script src="/modules/uploadEdit.js" defer></script>
+		<script src="/modules/edit.js" defer></script>
 	</head>
 	<body>
 		<header>
@@ -32,9 +32,13 @@
 			>
 				<div id="formcon">
 					<fieldset id="thumbnailcon">
-						<label for="thumbnail"
-							>Edit<br />
-							Thumbnail</label
+						<label
+							for="thumbnail"
+							class="imgselected"
+							style="
+								background-image: url('../../gltfModels/<%- model.modelid %>/<%= model.thumbnail %>');
+							"
+							>Edit</label
 						>
 						<input type="file" name="thumbnail" id="thumbnail" />
 					</fieldset>
@@ -55,7 +59,12 @@
 						</div>
 						<div>
 							<label for="name">Model Name:</label>
-							<input type="text" name="name" id="name" />
+							<input
+								type="text"
+								name="name"
+								id="name"
+								value="<%= locals.model.name %>"
+							/>
 						</div>
 						<div>
 							<label>Tags:</label>
@@ -193,23 +202,30 @@
 						</div>
 						<div id="longcon" class="hidden">
 							<label for="longitude">Longitude:</label>
-							<input type="text" name="longitude" id="longitude" />
+							<input
+								type="text"
+								name="longitude"
+								id="longitude"
+								value="<%= locals.model.longitude %>"
+							/>
 						</div>
 						<div id="latcon" class="hidden">
 							<label for="latitude">Latitude:</label>
-							<input type="text" name="latitude" id="latitude" />
+							<input
+								type="text"
+								name="latitude"
+								id="latitude"
+								value="<%= locals.model.latitude %>"
+							/>
 						</div>
 					</fieldset>
 				</div>
 
 				<fieldset id="descriptionfieldset">
 					<legend>Description</legend>
-					<textarea
-						name="description"
-						id="description"
-						cols="40"
-						rows="7"
-					></textarea>
+					<textarea name="description" id="description" cols="40" rows="7">
+<%= locals.model.description %></textarea
+					>
 				</fieldset>
 
 				<div id="buttoncon">

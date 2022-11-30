@@ -55,9 +55,7 @@ function setThumbnailBackground() {
 		thumbnailLabel.style.backgroundImage = "url(" + reader.result + ")";
 	};
 	if (file) reader.readAsDataURL(file);
-	thumbnailLabel.style.color = "white";
-	thumbnailLabel.style.fontSize = "40px";
-	thumbnailLabel.style.textShadow = "0px 0px 7px #575757";
+	thumbnailLabel.classList.add("imgselected");
 	thumbnailLabel.innerHTML = "Edit";
 }
 

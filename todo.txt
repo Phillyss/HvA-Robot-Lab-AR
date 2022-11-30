@@ -2,4 +2,9 @@ validate form inputs
 partials
 delete
 404
+logout page
 Overview - progressive enhancement
+apply feedback
+marker in qr code
+
+- edit page change thumbnail and model js
