@@ -2,5 +2,4 @@ validate form inputs
 partials
 delete
 404
-auth checks
 Overview - progressive enhancement

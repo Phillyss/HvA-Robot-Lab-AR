@@ -44,7 +44,7 @@ app.use(
 );
 
 // middleware to force login on certain pages
-const authenticated = (req, res, next) => {
+const authRequired = (req, res, next) => {
 	if (req.session.authenticated) {
 		next();
 	} else {
@@ -65,9 +65,9 @@ const overviewRoute = require("./routes/overviewRoute");
 const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
 
-app.get("/", authenticated, (req, res) => overviewRoute(req, res));
+app.get("/", authRequired, (req, res) => overviewRoute(req, res));
 app.use("/users", userRouter);
-app.use("/models", authenticated, modelRouter);
+app.use("/models", authRequired, modelRouter);
 app.get("/deletemodels", async (req, res) => {
 	const modelModel = require("./schemas/modelSchema");
 	const counterModel = require("./schemas/counterSchema");

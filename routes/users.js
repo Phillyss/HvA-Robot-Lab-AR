@@ -7,13 +7,31 @@ const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 
+// middleware to force login on certain pages
+const authRequired = (req, res, next) => {
+	if (req.session.authenticated) {
+		next();
+	} else {
+		res.redirect("/users/login");
+	}
+};
+
+// middleware to block pages when logged in
+const authBlocked = (req, res, next) => {
+	if (req.session.authenticated) {
+		res.redirect("back");
+	} else {
+		next();
+	}
+};
+
 // /users page
 router.get("/", (req, res) => {
 	res.render("pages/edit.ejs");
 });
 
 // /users/login
-router.get("/login", (req, res) => {
+router.get("/login", authBlocked, (req, res) => {
 	res.render("pages/login");
 });
 
@@ -58,7 +76,7 @@ router.post("/login", async (req, res) => {
 });
 
 // /users/signup: signup
-router.get("/signup", (req, res) => {
+router.get("/signup", authBlocked, (req, res) => {
 	res.render("pages/signup");
 });
 
@@ -117,7 +135,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // email confirmed page
-router.get("/confirm/:hash", async (req, res) => {
+router.get("/confirm/:hash", authBlocked, async (req, res) => {
 	// check if entered hash exists in db
 	const hash = req.params.hash;
 	const authRequest = await authModel.findOne({ hash: hash });
@@ -137,7 +155,7 @@ router.get("/confirm/:hash", async (req, res) => {
 });
 
 // confirm email page
-router.get("/confirm", (req, res) => {
+router.get("/confirm", authBlocked, (req, res) => {
 	res.render("pages/confirm", {
 		msg: `Welcome! <br />
 					<br />
@@ -145,7 +163,7 @@ router.get("/confirm", (req, res) => {
 	});
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", authRequired, (req, res) => {
 	res.render("pages/logout");
 });
 
