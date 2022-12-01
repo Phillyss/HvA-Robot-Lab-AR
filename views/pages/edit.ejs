@@ -26,8 +26,8 @@
 			<h1>Edit model</h1>
 
 			<form
-				action="/pages/upload.html"
-				method="GET"
+				action="/models/<%- locals.model.modelid %>/edit"
+				method="POST"
 				enctype="multipart/form-data"
 			>
 				<div id="formcon">
@@ -71,123 +71,18 @@
 							<button type="button" class="buttonblue buttonsmall">
 								Open Tags
 							</button>
-							<div class="popup tagspopup hidden">
-								<div>
-									<h2>Tags</h2>
-									<div>
-										<section>
-											<h3>Projects</h3>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-										</section>
-										<section>
-											<h3>Projects</h3>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-										</section>
-										<section>
-											<h3>Projects</h3>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-											<div>
-												<input
-													type="checkbox"
-													name="greenmile"
-													id="greenmile"
-												/>
-												<label for="greenmile">Green Mile</label>
-											</div>
-										</section>
-									</div>
-									<button type="button" class="buttonblue">Accept</button>
-								</div>
-							</div>
+							<input
+								type="hidden"
+								name="tags"
+								id="tags"
+								value="<%- locals.tagsString %>"
+							/>
 						</div>
 						<div>
 							<label>AR Type:</label>
 							<div>
+								<!-- find AR type and check correct box -->
+								<% if (locals.model.type === 'marker') { %>
 								<input
 									type="radio"
 									name="type"
@@ -198,6 +93,12 @@
 								<label for="marker">Marker</label>
 								<input type="radio" name="type" id="gps" value="gps" />
 								<label for="gps">GPS</label>
+								<% } else { %>
+								<input type="radio" name="type" id="marker" value="marker" />
+								<label for="marker">Marker</label>
+								<input type="radio" name="type" id="gps" value="gps" checked />
+								<label for="gps">GPS</label>
+								<% } %>
 							</div>
 						</div>
 						<div id="longcon" class="hidden">
@@ -244,6 +145,107 @@
 					</div>
 				</div>
 			</form>
+			<div class="popup tagspopup hidden">
+				<div>
+					<h2>Tags</h2>
+					<div>
+						<section>
+							<h3>Projects</h3>
+							<div>
+								<input
+									type="checkbox"
+									name="greenmile"
+									id="greenmile"
+									value="Green Mile"
+								/>
+								<label for="greenmile">Green Mile</label>
+							</div>
+							<div>
+								<input type="checkbox" name="cw4n" id="cw4n" value="CW4N" />
+								<label for="cw4n">CW4N</label>
+							</div>
+							<div>
+								<input
+									type="checkbox"
+									name="makeathon"
+									id="makeathon"
+									value="Makeathon"
+								/>
+								<label for="makeathon">Makeathon</label>
+							</div>
+						</section>
+						<section>
+							<h3>Materials</h3>
+							<div>
+								<input
+									type="checkbox"
+									name="virginwood"
+									id="virginwood"
+									value="Virgin Wood"
+								/>
+								<label for="virginwood">Virgin Wood</label>
+							</div>
+							<div>
+								<input
+									type="checkbox"
+									name="circularwood"
+									id="circularwood"
+									value="Circular Wood"
+								/>
+								<label for="circularwood">Circular Wood</label>
+							</div>
+							<div>
+								<input
+									type="checkbox"
+									name="plastic"
+									id="plastic"
+									value="Plastic"
+								/>
+								<label for="plastic">Plastic</label>
+							</div>
+							<div>
+								<input type="checkbox" name="metal" id="metal" value="Metal" />
+								<label for="metal">Metal</label>
+							</div>
+						</section>
+						<section>
+							<h3>Properties</h3>
+							<div>
+								<input
+									type="checkbox"
+									name="compdesign"
+									id="compdesign"
+									value="Computational Design"
+								/>
+								<label for="compdesign">Computational Design</label>
+							</div>
+							<div>
+								<input
+									type="checkbox"
+									name="tradjoinery"
+									id="tradjoinery"
+									value="Traditional Joinery"
+								/>
+								<label for="tradjoinery">Traditional Joinery</label>
+							</div>
+							<div>
+								<input type="checkbox" name="robot" id="robot" value="Robot" />
+								<label for="robot">Robot</label>
+							</div>
+							<div>
+								<input
+									type="checkbox"
+									name="furniture"
+									id="furniture"
+									value="Furniture"
+								/>
+								<label for="furniture">Furniture</label>
+							</div>
+						</section>
+					</div>
+					<button type="button" class="buttonblue">Accept</button>
+				</div>
+			</div>
 		</main>
 	</body>
 </html>

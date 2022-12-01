@@ -8,3 +8,9 @@ apply feedback
 marker in qr code
 
 - edit page change thumbnail and model js
+- check correct tags X
+- check correct ar type X
+
+- only update if new info selected X
+- do replace tags and description X
+- delete button
