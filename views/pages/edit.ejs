@@ -14,7 +14,7 @@
 			<nav>
 				<a href="upload.html"><img src="" /></a>
 				<ul>
-					<li><a href="./overview.html">Overview</a></li>
+					<li><a href="/">Overview</a></li>
 					<li><a href="./overview.html">Manuals</a></li>
 					<li><a href="./overview.html">Troubleshooting</a></li>
 				</ul>
@@ -40,7 +40,12 @@
 							"
 							>Edit</label
 						>
-						<input type="file" name="thumbnail" id="thumbnail" />
+						<input
+							type="file"
+							accept=".png, .jpg, .jpeg"
+							name="thumbnail"
+							id="thumbnail"
+						/>
 					</fieldset>
 
 					<fieldset>
@@ -50,12 +55,8 @@
 							<label for="model" class="buttonblue buttonsmall"
 								>Change File</label
 							>
-							<input
-								type="file"
-								name="model"
-								id="model"
-								placeholder="Thumbnail"
-							/>
+							<input type="file" accept=".gltf" name="model" id="model" />
+							<p></p>
 						</div>
 						<div>
 							<label for="name">Model Name:</label>

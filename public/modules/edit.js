@@ -68,8 +68,6 @@ function setThumbnailBackground() {
 		thumbnailLabel.style.backgroundImage = "url(" + reader.result + ")";
 	};
 	if (file) reader.readAsDataURL(file);
-	thumbnailLabel.classList.add("imgselected");
-	thumbnailLabel.innerHTML = "Edit";
 }
 
 function updateModelName() {
