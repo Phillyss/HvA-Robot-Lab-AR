@@ -6,7 +6,6 @@ const modelModel = require("../schemas/modelSchema");
 const counterModel = require("../schemas/counterSchema");
 const userModel = require("../schemas/userSchema");
 const qrcode = require("qrcode");
-const { workerData } = require("worker_threads");
 
 // --- FILE UPLOAD ---
 
@@ -69,41 +68,6 @@ router.use("/:id/edit", async (req, res, next) => {
 		if (req.method === "POST") {
 			// get model id
 			editModelID = req.params.id;
-			// console.log(req.files);
-
-			// // delete old thumbnail if new one exists
-			// if (req.files) {
-			// 	const newThumbnail = req.files.filter(file => {
-			// 		return file.name.includes("thumbnail");
-			// 	});
-
-			// 	console.log(newThumbnail);
-			// }
-			// console.log("test");
-
-			// const modelDir = fs.promises.readdir(`./appFiles/gltfModel/${editModelID}`, (err, files) => {
-			// 	if (err) {
-			// 		console.log('Unable to scan directory: ' + err);
-			// 	} else {
-
-			// 	}
-
-			// });
-
-			// let modeDir = await fs.promises.mkdir(
-			// 	`./appFiles/gltfModels/${newModelID}`,
-			// 	{ recursive: false },
-			// 	err => {
-			// 		if (err) {
-			// 			if (err.code == "EEXIST") {
-			// 				console.log("Dir already exists");
-			// 				return;
-			// 			}
-			// 		} else {
-			// 			console.log("Dir created");
-			// 		}
-			// 	}
-			// );
 		}
 		next();
 	} catch (err) {
@@ -226,6 +190,20 @@ router.post(
 	]),
 	async (req, res) => {
 		try {
+			// delete model if delete = true
+			if (req.body.delete === "true") {
+				// delete model folder from file system
+				await fs.promises.rm(`./appFiles/gltfModels/${editModelID}`, {
+					recursive: true,
+					force: true,
+				});
+
+				// delete model from database
+				await modelModel.deleteOne({ modelid: editModelID });
+				res.redirect("/");
+				return;
+			}
+
 			// put tags in array
 			const tagsArray = req.body.tags.split(", ");
 			let long = null;

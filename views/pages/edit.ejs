@@ -140,7 +140,13 @@
 					<div>
 						<h2>Delete Model?</h2>
 						<div>
-							<button type="button" class="buttongrey">delete</button>
+							<form
+								action="/models/<%- locals.model.modelid %>/edit"
+								method="POST"
+							>
+								<input type="hidden" name="delete" value="false" />
+								<button type="submit" class="buttongrey">delete</button>
+							</form>
 							<button type="button" class="buttonblue">Cancel</button>
 						</div>
 					</div>

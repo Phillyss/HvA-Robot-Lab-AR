@@ -10,8 +10,11 @@ const markerCB = document.querySelector("#marker");
 const gpsCB = document.querySelector("#gps");
 const longCon = document.querySelector("#longcon");
 const latCon = document.querySelector("#latcon");
-const cancelButton = document.querySelector(".delpopup .buttonblue");
-const cancelMain = document.querySelector("#buttoncon button");
+const deletePopup = document.querySelector(".delpopup");
+const deleteInput = document.querySelector(".delpopup input");
+const cancelDeleteButton = document.querySelector(".delpopup .buttonblue");
+const deleteButtonMain = document.querySelector("#buttoncon button");
+const submitDeleteButton = document.querySelector(".delpopup button");
 const cancelEditButton = document.querySelector(
 	"#buttoncon button:nth-of-type(2)"
 );
@@ -84,10 +87,24 @@ modelInput.addEventListener("change", updateModelName, false);
 openTagsButton.addEventListener("click", () => unhideEl(tagsPopup));
 markerCB.addEventListener("change", checkARType);
 gpsCB.addEventListener("change", checkARType);
+
+deleteButtonMain.addEventListener("click", () => {
+	deleteInput.value = "true";
+	unhideEl(deletePopup);
+});
+
+//submitDeleteButton.addEventListener("click");
+
+cancelDeleteButton.addEventListener("click", () => {
+	deleteInput.value = "false";
+	hideEl(deletePopup);
+});
+
 popupAcceptButton.addEventListener("click", () => {
 	setTags();
 	hideEl(tagsPopup);
 });
+
 cancelEditButton.addEventListener("click", () => {
 	window.location.href = `/models/${modelID}`;
 });
