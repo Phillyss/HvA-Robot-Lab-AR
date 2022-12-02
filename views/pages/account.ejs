@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/stylesheets/styles.css" />
+		<link rel="stylesheet" href="/stylesheets/overview.css" />
+		<title><%= locals.user.name %></title>
+		<script src="modules/overview.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="upload.html"><img src="" /></a>
+				<ul>
+					<li><a href="/">Overview</a></li>
+					<li><a href="/">Manuals</a></li>
+					<li><a href="/">Troubleshooting</a></li>
+				</ul>
+				<a href="/users/logout">Log Out</a>
+			</nav>
+		</header>
+
+		<main>
+			<aside>
+				<a href="/models/upload" class="buttonblue">Upload Model</a>
+				<div>
+					<h2>Filter</h2>
+					<h3>Tags</h3>
+					<form action="./overview.html" action="GET">
+						<div>
+							<input type="checkbox" name="greenmile" id="greenmile" />
+							<label for="greenmile">Green Mile</label>
+						</div>
+						<div>
+							<input type="checkbox" name="wood" id="wood" />
+							<label for="wood">wood</label>
+						</div>
+						<div>
+							<input type="checkbox" name="furniture" id="furniture" />
+							<label for="furniture">Furniture</label>
+						</div>
+						<button type="button" class="buttonblue buttonsmall">
+							Open Tags
+						</button>
+						<div class="popup tagspopup hidden">
+							<div>
+								<h2>Tags</h2>
+								<div>
+									<section>
+										<h3>Projects</h3>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+									</section>
+									<section>
+										<h3>Projects</h3>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+									</section>
+									<section>
+										<h3>Projects</h3>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+										<div>
+											<input type="checkbox" name="greenmile" id="greenmile" />
+											<label for="greenmile">Green Mile</label>
+										</div>
+									</section>
+								</div>
+								<button type="button" class="buttonblue">Accept</button>
+							</div>
+						</div>
+						<div>
+							<label for="creator" class="label">Creator</label>
+							<input type="text" name="creator" id="creator" />
+						</div>
+						<div>
+							<label for="title" class="label">Title</label>
+							<input type="text" name="title" id="title" />
+						</div>
+					</form>
+				</div>
+			</aside>
+			<section>
+				<h1><%= locals.user.name %></h1>
+				<ul>
+					<% models.forEach(model => { %>
+					<li>
+						<a href="/models/<%- model.modelid %>">
+							<div>
+								<img
+									src="/gltfModels/<%- model.modelid %>/<%= model.thumbnail %>"
+									alt="thumbnail"
+								/>
+							</div>
+							<div>
+								<h2><%= model.name %></h2>
+							</div>
+							<div>
+								<p><%= model.description %></p>
+							</div>
+							<div>
+								<p>
+									<% tags = model.tags[0]; for (let i = 1; i <
+									model.tags.length; i++) { tags = tags.concat(", ",
+									model.tags[i]); } %> <%= tags %>
+								</p>
+								<p><%= model.username %></p>
+							</div>
+						</a>
+					</li>
+					<% }) %>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userModel = require("../schemas/userSchema");
+const modelModel = require("../schemas/modelSchema");
 const counterModel = require("../schemas/counterSchema");
 const authModel = require("../schemas/authSchema");
 const bcrypt = require("bcryptjs");
@@ -175,19 +176,19 @@ router.post("/logout", (req, res) => {
 });
 
 // /users/userid
-router
-	.route("/:id")
-	.get((req, res) => {
-		res.send(`user ${req.params.id}`);
-	})
-	.put((req, res) => {
-		res.send(`update ${req.params.id}`);
-	})
-	.delete((req, res) => {
-		res.send(`delete ${req.params.id}`);
-	});
+router.get("/:id", async (req, res) => {
+	const user = await userModel.findOne({ id: req.params.id });
+	const models = await modelModel.find({ userid: user.id });
 
-// --------- functions
+	// if user id exists render account page, else return
+	if (user) {
+		res.render("pages/account", { user: user, models: models });
+	} else {
+		res.redirect("back");
+	}
+});
+
+// --- FUNCTIONS ---
 
 // validate sign up form
 function validateSignupForm(req, error) {
