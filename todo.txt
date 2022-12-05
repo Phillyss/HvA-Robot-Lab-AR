@@ -8,14 +8,6 @@ apply feedback
 marker in qr code
 show Long and Lat on detail page if GPS
 
-- edit page change thumbnail and model js X
-- check correct tags X
-- check correct ar type X
-
-- only update if new info selected X
-- do replace tags and description X
-- delete button
-
 --- Account
 - FE X
 - BE load models with userid X

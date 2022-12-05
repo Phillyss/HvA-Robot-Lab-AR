@@ -178,11 +178,15 @@ router.post("/logout", (req, res) => {
 // /users/userid
 router.get("/:id", async (req, res) => {
 	const user = await userModel.findOne({ id: req.params.id });
-	const models = await modelModel.find({ userid: user.id });
 
 	// if user id exists render account page, else return
 	if (user) {
-		res.render("pages/account", { user: user, models: models });
+		const models = await modelModel.find({ userid: user.id });
+		if (models.length > 0) {
+			res.render("pages/account", { user: user, models: models });
+		} else {
+			res.render("pages/account", { user: user });
+		}
 	} else {
 		res.redirect("back");
 	}

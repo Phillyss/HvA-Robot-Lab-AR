@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="/stylesheets/styles.css" />
 		<link rel="stylesheet" href="/stylesheets/uploadEdit.css" />
+		<script src="/modules/detail.js" defer></script>
 		<title><%= model.name %></title>
 	</head>
 	<body>
@@ -54,7 +55,8 @@
 
 				<section id="formcon">
 					<section class="thumbnailcon fset">
-						<img src="<%= qr %>" alt="qrcode" />
+						<img src="<%= qr %>" alt="qrcode ar" />
+						<img src="/img/barcode6.png" alt="armarker" />
 					</section>
 					<section class="fset">
 						<h2>Description</h2>
@@ -64,6 +66,10 @@
 					</section>
 				</section>
 			</section>
+
+			<div id="buttoncon">
+				<button type="button" class="buttonblue">Edit</button>
+			</div>
 		</main>
 	</body>
 </html>

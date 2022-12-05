@@ -123,7 +123,7 @@
 			<section>
 				<h1><%= locals.user.name %></h1>
 				<ul>
-					<% models.forEach(model => { %>
+					<% if (locals.models) { %> <% locals.models.forEach(model => { %>
 					<li>
 						<a href="/models/<%- model.modelid %>">
 							<div>
@@ -148,7 +148,7 @@
 							</div>
 						</a>
 					</li>
-					<% }) %>
+					<% }) %> <% } %>
 				</ul>
 			</section>
 		</main>
