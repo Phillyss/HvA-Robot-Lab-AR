@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="/stylesheets/styles.css" />
 		<link rel="stylesheet" href="/stylesheets/overview.css" />
 		<title><%= locals.user.name %></title>
-		<script src="modules/overview.js" defer></script>
+		<script src="/modules/overview.js" defer></script>
 	</head>
 	<body>
 		<header>
@@ -122,6 +122,7 @@
 			</aside>
 			<section>
 				<h1><%= locals.user.name %></h1>
+				<button type="button" class="buttongrey">Delete</button>
 				<ul>
 					<% if (locals.models) { %> <% locals.models.forEach(model => { %>
 					<li>
@@ -150,6 +151,26 @@
 					</li>
 					<% }) %> <% } %>
 				</ul>
+				<div class="popup delpopup hidden">
+					<div>
+						<h2>Delete Model?</h2>
+						<p>Deleting your account will delete your models as well.</p>
+						<div>
+							<button type="button" class="buttongrey">delete</button>
+							<button type="button" class="buttonblue">Cancel</button>
+						</div>
+					</div>
+					<div class="hidden">
+						<h2>Enter your email to confirm</h2>
+						<div>
+							<form action="/users/<%- locals.user.id %>" method="POST">
+								<input type="hidden" name="delete" value="false" />
+								<button type="submit" class="buttongrey">delete account</button>
+							</form>
+							<button type="button" class="buttonblue">Cancel</button>
+						</div>
+					</div>
+				</div>
 			</section>
 		</main>
 	</body>

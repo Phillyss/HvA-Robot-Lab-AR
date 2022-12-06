@@ -97,6 +97,48 @@ h1 {
 	margin-bottom: 18px;
 }
 
+/* delete button */
+h1 + button {
+	position: absolute;
+	right: 18px;
+	top: 90px;
+}
+
+h1 + button:hover {
+	color: #ff2e60;
+	border-color: #ff2e60;
+}
+
+/* delete popup account page */
+.delpopup div {
+	height: 250px;
+	width: 500px;
+	text-align: center;
+}
+
+.delpopup h2 {
+	color: black;
+	font-size: 24px;
+	font-weight: normal;
+	text-transform: none;
+	position: unset;
+}
+
+main section .delpopup p:first-of-type {
+	width: auto;
+	text-align: center;
+	font-size: 16px;
+}
+
+.delpopup div div {
+	position: absolute;
+	bottom: 42px;
+	right: 42px;
+	width: 416px;
+	justify-content: space-between;
+	background-color: transparent;
+}
+
 main ul {
 	display: flex;
 	flex-wrap: wrap;
