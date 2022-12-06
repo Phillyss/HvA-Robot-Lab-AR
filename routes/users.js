@@ -52,6 +52,7 @@ router.post("/login", async (req, res) => {
 					id: requestedUser.id,
 					name: requestedUser.name,
 				};
+				await req.session.save();
 				res.redirect("/");
 			} else {
 				// if password incorrect
