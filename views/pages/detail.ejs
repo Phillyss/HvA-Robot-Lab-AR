@@ -50,6 +50,16 @@
 								i++) { tags = tags.concat(", ", model.tags[i]); } %> <%= tags %>
 							</p>
 						</div>
+						<% if (locals.model.type === 'gps') { %>
+						<div>
+							<p>Longitude:</p>
+							<p><%= locals.model.longitude %></p>
+						</div>
+						<div>
+							<p>Latitude:</p>
+							<p><%= locals.model.latitude %></p>
+						</div>
+						<% } %>
 					</section>
 				</section>
 

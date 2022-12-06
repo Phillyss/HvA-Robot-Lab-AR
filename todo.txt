@@ -1,11 +1,9 @@
 validate form inputs
 partials
-delete
 404
 logout page
 Overview - progressive enhancement
 apply feedback
-marker in qr code
 show Long and Lat on detail page if GPS
 Forgot password
 
