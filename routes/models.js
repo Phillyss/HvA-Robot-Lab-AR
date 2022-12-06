@@ -259,6 +259,7 @@ router.get("/:id/ar", async (req, res) => {
 // render model detail page
 router.get("/:id", async (req, res) => {
 	const model = await modelModel.findOne({ modelid: req.params.id });
+	let isCreator = false;
 	// check if model and user exist
 	if (model) {
 		const creator = await userModel.findOne({ id: model.userid });
@@ -269,11 +270,21 @@ router.get("/:id", async (req, res) => {
 			res.redirect("/");
 		}
 
+		// check if user is creator to render edit button
+		if (model.userid === req.session.user.id) {
+			isCreator = true;
+		}
+
 		// generate qrcode
 		const newURL = `http://localhost:3000/models/${req.params.id}/ar`;
 		const qr = await qrcode.toDataURL(newURL);
 
-		res.render("pages/detail", { model: model, creator: creator, qr: qr });
+		res.render("pages/detail", {
+			model: model,
+			creator: creator,
+			qr: qr,
+			isCreator: isCreator,
+		});
 	} else {
 		res.redirect("/");
 	}

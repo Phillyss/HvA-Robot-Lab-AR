@@ -149,7 +149,7 @@ router.get("/confirm/:hash", authBlocked, async (req, res) => {
 
 		const del = await authRequest.delete();
 
-		res.render("pages/confirm", { msg: "Email confirmed succesfully!" });
+		res.render("pages/confirm", { msg: "Your account has been enabled!" });
 	} else {
 		res.redirect("/users/login");
 	}
@@ -242,7 +242,7 @@ async function sendAuthMail(newUser) {
 			from: account.user,
 			to: newUser.email,
 			subject: "Confirm Robot Lab AR Account",
-			html: `Hey ${newUser.name}! <br /> Press the following link to confirm your Robot Lab AR account:<br /> 
+			html: `Hey ${newUser.name}! <br /> Press the following link to enable your Robot Lab AR account:<br /> 
 			<a href="http://localhost:3000/users/confirm/${hash}">http://localhost:3000/users/confirm/${hash}</a>`,
 		};
 
