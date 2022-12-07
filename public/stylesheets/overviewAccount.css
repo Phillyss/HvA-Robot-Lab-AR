@@ -104,7 +104,7 @@ h1 + button {
 	top: 90px;
 }
 
-h1 + button:hover {
+.delete:hover {
 	color: #ff2e60;
 	border-color: #ff2e60;
 }
@@ -138,6 +138,18 @@ main section .delpopup p:first-of-type {
 	justify-content: space-between;
 	background-color: transparent;
 }
+
+.delpopup input {
+	position: absolute;
+	top: -66px;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 30px;
+	width: 240px;
+	border-style: solid;
+}
+
+/* main */
 
 main ul {
 	display: flex;

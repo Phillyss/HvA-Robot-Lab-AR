@@ -193,6 +193,14 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
+router.post("/:id", async (req, res) => {
+	try {
+		const user = await userModel.findOne({ id: req.params.id });
+	} catch (err) {
+		console.log(err);
+	}
+});
+
 // --- FUNCTIONS ---
 
 // validate sign up form
