@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const fs = require("fs");
 const userModel = require("../schemas/userSchema");
 const modelModel = require("../schemas/modelSchema");
 const counterModel = require("../schemas/counterSchema");
@@ -7,6 +8,7 @@ const authModel = require("../schemas/authSchema");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const { fstat } = require("fs");
 
 // middleware to force login on certain pages
 const authRequired = (req, res, next) => {
@@ -46,7 +48,7 @@ router.post("/login", async (req, res) => {
 	if (requestedUser) {
 		if (requestedUser.active) {
 			// check db for input email and compare passwords > if match log in user
-			const isMatch = await bcrypt.compare(password, requestedUser.password);
+			const isMatch = bcrypt.compare(password, requestedUser.password);
 			if (isMatch) {
 				req.session.authenticated = true;
 				req.session.user = {
@@ -54,7 +56,7 @@ router.post("/login", async (req, res) => {
 					id: requestedUser.id,
 					name: requestedUser.name,
 				};
-				await req.session.save();
+				req.session.save();
 				res.redirect("/");
 			} else {
 				// if password incorrect
@@ -222,16 +224,21 @@ router.post("/:id", async (req, res) => {
 				if (err) console.log(err);
 			});
 
-			// delete models
+			// delete models from db and fs
 			const models = await modelModel.find({ userid: user.id });
 			models.forEach(async m => {
+				await fs.promises.rm(`./appFiles/gltfModels/${m.modelid}`, {
+					recursive: true,
+					force: true,
+				});
 				await m.delete();
 			});
 
 			// delete user
 			await user.delete();
+
+			res.redirect("/users/login");
 		}
-		res.redirect("/users/login");
 	} catch (err) {
 		console.log(err);
 	}
