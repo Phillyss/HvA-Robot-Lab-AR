@@ -1,0 +1,39 @@
+section {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 250px;
+	width: 500px;
+	background-color: white;
+	text-align: center;
+	padding: 42px;
+}
+
+h2 {
+	color: black;
+	font-size: 24px;
+	font-weight: normal;
+	text-transform: none;
+	position: unset;
+	margin-top: 18px;
+}
+
+section div {
+	position: absolute;
+	bottom: 42px;
+	right: 42px;
+	width: 416px;
+	justify-content: space-between;
+	background-color: transparent;
+}
+
+a {
+	display: inline-block;
+	line-height: 36px;
+}
+
+a:hover {
+	cursor: pointer;
+	scale: 0.95;
+}

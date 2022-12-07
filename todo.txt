@@ -1,7 +1,7 @@
 validate form inputs
 partials
 404
-logout page
 Overview - progressive enhancement
 apply feedback
 Forgot password
+icons
