@@ -26,6 +26,8 @@ const authBlocked = (req, res, next) => {
 	}
 };
 
+// --- ROUTES ---
+
 // /users page
 router.get("/", (req, res) => {
 	res.render("pages/edit.ejs");
@@ -180,13 +182,23 @@ router.post("/logout", (req, res) => {
 router.get("/:id", async (req, res) => {
 	const user = await userModel.findOne({ id: req.params.id });
 
+	// check if user is owner of account
+	let isOwner = false;
+	if (parseInt(req.params.id) === req.session.user.id) {
+		isOwner = true;
+	}
+
 	// if user id exists render account page, else return
 	if (user) {
 		const models = await modelModel.find({ userid: user.id });
 		if (models.length > 0) {
-			res.render("pages/account", { user: user, models: models });
+			res.render("pages/account", {
+				user: user,
+				models: models,
+				isOwner: isOwner,
+			});
 		} else {
-			res.render("pages/account", { user: user });
+			res.render("pages/account", { user: user, isOwner: isOwner });
 		}
 	} else {
 		res.redirect("back");
@@ -195,7 +207,31 @@ router.get("/:id", async (req, res) => {
 
 router.post("/:id", async (req, res) => {
 	try {
-		const user = await userModel.findOne({ id: req.params.id });
+		// delete account
+		if (req.body.delete === "true") {
+			// reload page if email is incorrect
+			if (req.body.email !== req.body.userEmail) {
+				res.redirect(`/users/${req.params.id}`);
+				return;
+			}
+
+			const user = await userModel.findOne({ id: req.params.id });
+
+			// destroy session
+			req.session.destroy(err => {
+				if (err) console.log(err);
+			});
+
+			// delete models
+			const models = await modelModel.find({ userid: user.id });
+			models.forEach(async m => {
+				await m.delete();
+			});
+
+			// delete user
+			await user.delete();
+		}
+		res.redirect("/users/login");
 	} catch (err) {
 		console.log(err);
 	}

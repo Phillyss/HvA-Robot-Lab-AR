@@ -4,13 +4,4 @@ partials
 logout page
 Overview - progressive enhancement
 apply feedback
-show Long and Lat on detail page if GPS
 Forgot password
-
---- Account
-- FE X
-- BE load models with userid X
-- only show delete when your account
-
-del session when account del
-del post text or hidden input too

@@ -11,8 +11,9 @@ const deletePageTwo = document.querySelector(".delpopup div:nth-of-type(2)");
 const cancelButtonTwo = document.querySelector(".delpopup div form + button");
 const deleteButtonTwo = document.querySelector(".delpopup div form button");
 const deleteForm = document.querySelector(".delpopup form");
+const deleteInput = document.querySelector(".delpopup input[type=hidden]");
 const emailInput = document.querySelector(".delpopup input[type=text]");
-const hiddenInput = document.querySelector(".delpopup input[type=hidden]");
+const userEmailInput = document.getElementById("userEmail");
 
 const cancelButtonOne = document.querySelector(
 	".delpopup div:nth-of-type(1) button:last-of-type"
@@ -35,7 +36,7 @@ openTagsButton.addEventListener("click", () => unhideEl(tagsPopup));
 // account page
 if (deleteButton) {
 	deleteButton.addEventListener("click", () => {
-		//deleteInput.value = "true";
+		deleteInput.value = "true";
 		unhideEl(deletePopup);
 	});
 
@@ -45,23 +46,23 @@ if (deleteButton) {
 	});
 
 	cancelButtonOne.addEventListener("click", () => {
-		//deleteInput.value = "false";
+		deleteInput.value = "false";
 		hideEl(deletePopup);
 	});
 
 	cancelButtonTwo.addEventListener("click", () => {
-		//deleteInput.value = "false";
+		deleteInput.value = "false";
 		hideEl(deletePopup);
 		hideEl(deletePageTwo);
 		unhideEl(deletePageOne);
 	});
-}
 
-deleteForm.addEventListener("submit", e => {
-	console.log(emailInput.value);
-	console.log(hiddenInput.value);
-	if (emailInput.value !== hiddenInput.value) {
-		emailInput.style.borderColor = "#ff2e60";
-		e.preventDefault();
-	}
-});
+	deleteForm.addEventListener("submit", e => {
+		if (deleteInput.value === "true") {
+			if (emailInput.value !== userEmailInput.value) {
+				emailInput.style.borderColor = "#ff2e60";
+				e.preventDefault();
+			}
+		}
+	});
+}

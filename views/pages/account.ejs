@@ -122,7 +122,9 @@
 			</aside>
 			<section>
 				<h1><%= locals.user.name %></h1>
+				<% if (locals.isOwner) { %>
 				<button type="button" class="buttongrey delete">Delete</button>
+				<% } %>
 				<ul>
 					<% if (locals.models) { %> <% locals.models.forEach(model => { %>
 					<li>
@@ -151,6 +153,7 @@
 					</li>
 					<% }) %> <% } %>
 				</ul>
+				<% if (locals.isOwner) { %>
 				<div class="popup delpopup hidden">
 					<div>
 						<h2>Delete Account?</h2>
@@ -164,12 +167,19 @@
 						<h2>Enter your email to confirm</h2>
 						<div>
 							<form action="/users/<%- locals.user.id %>" method="POST">
+								<input type="hidden" name="delete" value="false" />
 								<input
 									type="hidden"
-									name="delete"
+									name="userEmail"
+									id="userEmail"
 									value="<%= locals.user.email %>"
 								/>
-								<input type="text" name="email" id="email" />
+								<input
+									type="text"
+									name="email"
+									id="email"
+									autocomplete="false"
+								/>
 								<button type="submit" class="buttongrey delete">
 									delete account
 								</button>
@@ -178,6 +188,7 @@
 						</div>
 					</div>
 				</div>
+				<% } %>
 			</section>
 		</main>
 	</body>
