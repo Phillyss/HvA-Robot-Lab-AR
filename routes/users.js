@@ -182,28 +182,38 @@ router.post("/logout", (req, res) => {
 
 // /users/userid
 router.get("/:id", async (req, res) => {
-	const user = await userModel.findOne({ id: req.params.id });
-
-	// check if user is owner of account
-	let isOwner = false;
-	if (parseInt(req.params.id) === req.session.user.id) {
-		isOwner = true;
-	}
-
-	// if user id exists render account page, else return
-	if (user) {
-		const models = await modelModel.find({ userid: user.id });
-		if (models.length > 0) {
-			res.render("pages/account", {
-				user: user,
-				models: models,
-				isOwner: isOwner,
-			});
-		} else {
-			res.render("pages/account", { user: user, isOwner: isOwner });
+	try {
+		// check if id is a number
+		if (isNaN(req.params.id)) {
+			res.redirect("back");
+			return;
 		}
-	} else {
-		res.redirect("back");
+
+		const user = await userModel.findOne({ id: req.params.id });
+
+		// if user id exists render account page, else return
+		if (user) {
+			// check if user is owner of account
+			let isOwner = false;
+			if (parseInt(req.params.id) === req.session.user.id) {
+				isOwner = true;
+			}
+
+			const models = await modelModel.find({ userid: user.id });
+			if (models.length > 0) {
+				res.render("pages/account", {
+					user: user,
+					models: models,
+					isOwner: isOwner,
+				});
+			} else {
+				res.render("pages/account", { user: user, isOwner: isOwner });
+			}
+		} else {
+			res.redirect("back");
+		}
+	} catch (err) {
+		console.log(err);
 	}
 });
 
@@ -243,6 +253,8 @@ router.post("/:id", async (req, res) => {
 		console.log(err);
 	}
 });
+
+//router.get("/*", (req, res) => res.redirect("back"));
 
 // --- FUNCTIONS ---
 

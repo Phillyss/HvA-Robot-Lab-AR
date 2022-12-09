@@ -258,6 +258,12 @@ router.get("/:id/ar", async (req, res) => {
 
 // render model detail page
 router.get("/:id", async (req, res) => {
+	// check if id is number
+	if (isNaN(req.params.id)) {
+		res.redirect("back");
+		return;
+	}
+
 	const model = await modelModel.findOne({ modelid: req.params.id });
 	let isCreator = false;
 	// check if model and user exist

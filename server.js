@@ -76,6 +76,7 @@ app.get("/deletemodels", async (req, res) => {
 	const resetCounter = await counterModel.updateOne({ count: 0 });
 	res.send("models deleted");
 });
+app.get("/*", (req, res) => res.redirect("back"));
 
 // redirects
 app.get("/login", (req, res) => res.redirect("users/login"));
