@@ -226,9 +226,14 @@ h2 {
 	justify-content: left;
 }
 
-.fset div p + p {
+.fset div p + p,
+.fset div a {
 	position: absolute;
 	left: 130px;
+}
+
+.fset div a {
+	color: black;
 }
 
 .thumbnailcon img {
