@@ -5,3 +5,11 @@ Overview - progressive enhancement
 apply feedback
 Forgot password
 icons
+Manuals
+Troubleshooting
+filtering
+write code Manuals
+auth timeout
+logo
+account tab nav
+clickable profile names
