@@ -152,6 +152,27 @@ nav a:hover::before {
 	color: #4717f1;
 }
 
+nav button {
+	height: 40px;
+	width: 40px;
+	border-style: none;
+	display: block;
+}
+
+nav div {
+	position: absolute;
+	right: 18px;
+	top: 57px;
+	width: 240px;
+	background-color: white;
+	padding: 18px;
+}
+nav div a {
+	font-size: 16px;
+	display: block;
+	width: auto;
+}
+
 /* --- Main --- */
 main {
 	margin: auto auto;

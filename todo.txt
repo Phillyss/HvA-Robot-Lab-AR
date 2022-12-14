@@ -1,14 +1,15 @@
 validate form inputs
 partials
-404 < 
 Overview - progressive enhancement
 apply feedback
 Forgot password
 icons <
 Manuals
 Troubleshooting
-filtering
+filtering < 
 write code Manuals
 auth timeout
-logo
+logo, logo ar
 account tab nav
+AR settings
+AR gestures
