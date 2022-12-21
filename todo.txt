@@ -13,3 +13,6 @@ logo, logo ar
 account tab nav
 AR settings
 AR gestures
+AR onboarding marker
+Admin role
+Form styles
