@@ -60,11 +60,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(partials());
 app.set("view engine", "ejs");
 
-// define routes
+// define routers
 const overviewRoute = require("./routes/overviewRoute");
 const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
 
+// request routes
 app.get("/", authRequired, (req, res) => overviewRoute(req, res));
 app.use("/users", userRouter);
 app.use("/models", authRequired, modelRouter);

@@ -45,6 +45,7 @@ router.post("/login", async (req, res) => {
 	const { email, password } = req.body;
 	const requestedUser = await userModel.findOne({ email });
 
+	// --- check if login is valid ---
 	if (requestedUser) {
 		if (requestedUser.active) {
 			// check db for input email and compare passwords > if match log in user
@@ -183,7 +184,7 @@ router.post("/logout", (req, res) => {
 // /users/userid
 router.get("/:id", async (req, res) => {
 	try {
-		// check if id is a number
+		// return if requested id is not a number
 		if (isNaN(req.params.id)) {
 			res.redirect("back");
 			return;
