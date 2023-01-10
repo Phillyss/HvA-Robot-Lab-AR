@@ -146,5 +146,7 @@ helpCloseButton.addEventListener("click", closeHelp);
 settingsButton.addEventListener("click", clickSettings);
 
 arScene.addEventListener("markerFound", e => {
-	markerContainer.style.display = "none";
+	if (markerContainer) {
+		markerContainer.style.display = "none";
+	}
 });
