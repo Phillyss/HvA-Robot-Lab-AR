@@ -12,6 +12,8 @@ const helpButton = document.querySelector(
 );
 const helpContainer = document.querySelector("section:nth-of-type(2)");
 const helpCloseButton = document.querySelector("section button");
+const markerContainer = document.getElementById("markerContainer");
+const arScene = document.querySelector("a-scene");
 
 // states
 let helpOpen = false;
@@ -142,3 +144,7 @@ infoButton.addEventListener("click", clickInfoButton);
 helpButton.addEventListener("click", clickHelp);
 helpCloseButton.addEventListener("click", closeHelp);
 settingsButton.addEventListener("click", clickSettings);
+
+arScene.addEventListener("markerFound", e => {
+	markerContainer.style.display = "none";
+});
