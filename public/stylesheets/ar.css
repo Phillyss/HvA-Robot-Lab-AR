@@ -60,6 +60,10 @@ button {
 	border: none;
 }
 
+svg {
+	pointer-events: none;
+}
+
 /* --- Nav --- */
 
 /* - nav buttons - */

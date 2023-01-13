@@ -136,6 +136,8 @@ function checkTap(event) {
 //   video.play();
 // }
 
+document.addEventListener("click", e => console.log(e.target));
+
 // Event listeners
 document.addEventListener("click", event => checkTap(event));
 modelButton.addEventListener("click", clickModelButton);
