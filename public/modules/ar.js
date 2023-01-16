@@ -11,6 +11,9 @@ const settingsContainer = document.querySelector("section:nth-of-type(3)");
 const pauseButton = document.querySelector(
 	"section:nth-of-type(3) li:nth-of-type(1) button"
 );
+const resetButton = document.querySelector(
+	"section:nth-of-type(3) li:nth-of-type(2) button"
+);
 
 const helpButton = document.querySelector(
 	"nav ul:nth-of-type(2) li:nth-of-type(2) button"
@@ -169,6 +172,7 @@ marker.addEventListener("markerLost", e => {
 });
 
 const pausePath = document.querySelector("section:nth-of-type(3) li path");
+// pause/play button
 pauseButton.addEventListener("click", e => {
 	if (isPlaying) {
 		isPlaying = false;
@@ -185,4 +189,10 @@ pauseButton.addEventListener("click", e => {
 			"M120.16 45A20.162 20.162 0 0 0 100 65.16v381.68A20.162 20.162 0 0 0 120.16 467h65.68A20.162 20.162 0 0 0 206 446.84V65.16A20.162 20.162 0 0 0 185.84 45h-65.68zm206 0A20.162 20.162 0 0 0 306 65.16v381.68A20.162 20.162 0 0 0 326.16 467h65.68A20.162 20.162 0 0 0 412 446.84V65.16A20.162 20.162 0 0 0 391.84 45h-65.68z"
 		);
 	}
+});
+
+// reset rotation and scale
+resetButton.addEventListener("click", e => {
+	model.setAttribute("rotation", "0 0 0");
+	model.setAttribute("scale", "2 2 2");
 });
