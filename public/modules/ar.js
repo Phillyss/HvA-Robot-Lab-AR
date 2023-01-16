@@ -3,10 +3,15 @@ const modelButton = document.querySelector("nav li:first-of-type button");
 const infoButton = document.querySelector("nav li:nth-of-type(2) button");
 const infoContainer = document.querySelector("section:first-of-type");
 const circularButtons = document.querySelector("nav ul:nth-of-type(2)");
+
 const settingsButton = document.querySelector(
 	"nav ul:nth-of-type(2) button:nth-of-type(1)"
 );
 const settingsContainer = document.querySelector("section:nth-of-type(3)");
+const pauseButton = document.querySelector(
+	"section:nth-of-type(3) li:nth-of-type(1) button"
+);
+
 const helpButton = document.querySelector(
 	"nav ul:nth-of-type(2) li:nth-of-type(2) button"
 );
@@ -14,6 +19,8 @@ const helpContainer = document.querySelector("section:nth-of-type(2)");
 const helpCloseButton = document.querySelector("section button");
 const markerContainer = document.getElementById("markerContainer");
 const arScene = document.querySelector("a-scene");
+const marker = document.querySelector("a-marker");
+const model = document.querySelector("a-entity");
 
 // states
 let helpOpen = false;
@@ -130,14 +137,6 @@ function checkTap(event) {
 	}
 }
 
-// autoplay video
-// if (document.querySelector("video")) {
-//   const video = document.querySelector("video");
-//   video.play();
-// }
-
-document.addEventListener("click", e => console.log(e.target));
-
 // Event listeners
 document.addEventListener("click", event => checkTap(event));
 modelButton.addEventListener("click", clickModelButton);
@@ -147,8 +146,43 @@ helpButton.addEventListener("click", clickHelp);
 helpCloseButton.addEventListener("click", closeHelp);
 settingsButton.addEventListener("click", clickSettings);
 
+// hide marker example
 arScene.addEventListener("markerFound", e => {
 	if (markerContainer) {
 		markerContainer.style.display = "none";
+	}
+});
+
+// --- pause and play animations
+let isPlaying = false;
+
+// play animation when marker found
+marker.addEventListener("markerFound", e => {
+	isPlaying = true;
+	model.setAttribute("animation-mixer", { timeScale: 1 });
+});
+
+// stop animation when marker lost
+marker.addEventListener("markerLost", e => {
+	isPlaying = false;
+	model.removeAttribute("animation-mixer");
+});
+
+const pausePath = document.querySelector("section:nth-of-type(3) li path");
+pauseButton.addEventListener("click", e => {
+	if (isPlaying) {
+		isPlaying = false;
+		model.setAttribute("animation-mixer", { timeScale: 0 });
+		pausePath.setAttribute(
+			"d",
+			"M106.854 106.002a26.003 26.003 0 0 0-25.64 29.326c16 124 16 117.344 0 241.344a26.003 26.003 0 0 0 35.776 27.332l298-124a26.003 26.003 0 0 0 0-48.008l-298-124a26.003 26.003 0 0 0-10.136-1.994z"
+		);
+	} else {
+		isPlaying = true;
+		model.setAttribute("animation-mixer", { timeScale: 1 });
+		pausePath.setAttribute(
+			"d",
+			"M120.16 45A20.162 20.162 0 0 0 100 65.16v381.68A20.162 20.162 0 0 0 120.16 467h65.68A20.162 20.162 0 0 0 206 446.84V65.16A20.162 20.162 0 0 0 185.84 45h-65.68zm206 0A20.162 20.162 0 0 0 306 65.16v381.68A20.162 20.162 0 0 0 326.16 467h65.68A20.162 20.162 0 0 0 412 446.84V65.16A20.162 20.162 0 0 0 391.84 45h-65.68z"
+		);
 	}
 });
