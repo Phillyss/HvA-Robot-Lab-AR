@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
 	if (requestedUser) {
 		if (requestedUser.active) {
 			// check db for input email and compare passwords > if match log in user
-			const isMatch = bcrypt.compare(password, requestedUser.password);
+			const isMatch = await bcrypt.compare(password, requestedUser.password);
 			if (isMatch) {
 				req.session.authenticated = true;
 				req.session.user = {
