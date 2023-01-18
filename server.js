@@ -4,10 +4,12 @@ const partials = require("express-partials");
 const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
 const mongoose = require("mongoose");
+const modelModel = require("./schemas/modelSchema");
 const cors = require("cors");
 const fs = require("fs");
 const multer = require("multer");
 require("dotenv").config();
+const formidable = require("express-formidable");
 
 // DB setup
 const uri = process.env.URI;
@@ -78,6 +80,21 @@ app.get("/deletemodels", async (req, res) => {
 	res.send("models deleted");
 });
 app.get("/*", (req, res) => res.redirect("back"));
+
+const useFormidable = (req, res, next) => {
+	app.use(formidable());
+	next();
+};
+
+// load more button
+app.post("/load-more", useFormidable, async (req, res) => {
+	const startFrom = parseInt(req.fields.startFrom);
+	const nextModels = await modelModel
+		.find({ modelid: { $lt: startFrom } })
+		.sort({ modelid: -1 })
+		.limit(2);
+	res.json(nextModels);
+});
 
 // redirects
 app.get("/login", (req, res) => res.redirect("users/login"));
