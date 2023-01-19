@@ -5,23 +5,16 @@ let startFrom = parseInt(lastModelA.getAttribute("href").split("s/")[1]);
 
 //document.querySelector("h1").addEventListener("click", getData);
 // load models on scroll
-let nextScroll = 0;
+let nextScroll = 1008;
 ul.addEventListener("scroll", e => {
-	console.log(ul.scrollHeight);
 	const lastModel = document.querySelector("main ul li:last-of-type");
-	if (isInViewport(lastModel)) {
+	if (isInViewport(lastModel) && ul.scrollHeight >= nextScroll) {
+		nextScroll += 732;
 		getData();
 	}
 });
 
-// document.querySelector("nav").addEventListener("click", e => {
-// 	const ul = document.querySelector("main ul");
-// 	const childAmount = ul.children.length;
-// 	if (childAmount % 2 !== 0) {
-// 		nav;
-// 	}
-// });
-
+// check if element in in viewport
 function isInViewport(element) {
 	const rect = element.getBoundingClientRect();
 	return (
@@ -61,6 +54,7 @@ function getData() {
 						tags = tags.concat(", ", data[a].tags[i]);
 					}
 
+					// build model card
 					html += `<li>
 						<a href="/models/${data[a].modelid}">
 							<div>
@@ -85,16 +79,15 @@ function getData() {
 					</li>`;
 				}
 
-				// Appending the data below old data in <tbody> tag
+				// insert new model cards into the page
 				document.querySelector("h1 + ul").innerHTML += html;
 
-				// Incrementing the offset so you can get next records when that button is clicked
+				// get next model id to start grabbing from db
 				startFrom = document
 					.querySelector("main ul li:last-of-type a")
 					.getAttribute("href")
 					.split("s/")[1];
 			}
-			console.log(`New start from: ${startFrom}`);
 		}
 	};
 

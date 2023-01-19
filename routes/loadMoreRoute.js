@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 	const nextModels = await modelModel
 		.find({ modelid: { $lt: startFrom } })
 		.sort({ modelid: -1 })
-		.limit(3);
+		.limit(8);
 	res.json(nextModels);
 });
 
