@@ -6,7 +6,7 @@ async function renderOveview(req, res) {
 		const models = await modelModel
 			.find({})
 			.sort([["modelid", -1]])
-			.limit(2);
+			.limit(9);
 		res.render("pages/overview", {
 			models: models,
 			userID: req.session.user.id,

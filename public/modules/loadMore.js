@@ -1,15 +1,37 @@
 // Starting position to get new records
 const lastModelA = document.querySelector("main ul li:last-of-type a");
+const ul = document.querySelector("main ul");
 let startFrom = parseInt(lastModelA.getAttribute("href").split("s/")[1]);
-console.log(startFrom);
 
-// window.addEventListener("load", function () {
-// 	// Calling the function on page load
-// 	getData();
-// 	getData();
+//document.querySelector("h1").addEventListener("click", getData);
+// load models on scroll
+let nextScroll = 0;
+ul.addEventListener("scroll", e => {
+	console.log(ul.scrollHeight);
+	const lastModel = document.querySelector("main ul li:last-of-type");
+	if (isInViewport(lastModel)) {
+		getData();
+	}
+});
+
+// document.querySelector("nav").addEventListener("click", e => {
+// 	const ul = document.querySelector("main ul");
+// 	const childAmount = ul.children.length;
+// 	if (childAmount % 2 !== 0) {
+// 		nav;
+// 	}
 // });
 
-document.querySelector("h1").addEventListener("click", getData);
+function isInViewport(element) {
+	const rect = element.getBoundingClientRect();
+	return (
+		rect.top >= 0 &&
+		rect.left >= 0 &&
+		rect.bottom <=
+			(window.innerHeight || document.documentElement.clientHeight) &&
+		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+	);
+}
 
 // This function will be called every time a button pressed
 function getData() {
@@ -72,6 +94,7 @@ function getData() {
 					.getAttribute("href")
 					.split("s/")[1];
 			}
+			console.log(`New start from: ${startFrom}`);
 		}
 	};
 

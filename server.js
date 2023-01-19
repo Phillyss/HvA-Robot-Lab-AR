@@ -66,11 +66,13 @@ app.set("view engine", "ejs");
 const overviewRoute = require("./routes/overviewRoute");
 const userRouter = require("./routes/users");
 const modelRouter = require("./routes/models");
+const loadMoreRouter = require("./routes/loadMoreRoute");
 
 // request routes
 app.get("/", authRequired, (req, res) => overviewRoute(req, res));
 app.use("/users", userRouter);
 app.use("/models", authRequired, modelRouter);
+app.use("/load-more", loadMoreRouter);
 app.get("/deletemodels", async (req, res) => {
 	const modelModel = require("./schemas/modelSchema");
 	const counterModel = require("./schemas/counterSchema");
@@ -79,26 +81,11 @@ app.get("/deletemodels", async (req, res) => {
 	const resetCounter = await counterModel.updateOne({ count: 0 });
 	res.send("models deleted");
 });
-app.get("/*", (req, res) => res.redirect("back"));
-
-const useFormidable = (req, res, next) => {
-	app.use(formidable());
-	next();
-};
-
-// load more button
-app.post("/load-more", useFormidable, async (req, res) => {
-	const startFrom = parseInt(req.fields.startFrom);
-	const nextModels = await modelModel
-		.find({ modelid: { $lt: startFrom } })
-		.sort({ modelid: -1 })
-		.limit(2);
-	res.json(nextModels);
-});
 
 // redirects
 app.get("/login", (req, res) => res.redirect("users/login"));
 app.get("/signup", (req, res) => res.redirect("users/signup"));
+app.get("/*", (req, res) => res.redirect("back"));
 
 app.use((req, res, next) => res.status(404).send("Page not found"));
 
