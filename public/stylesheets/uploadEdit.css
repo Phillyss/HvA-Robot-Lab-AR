@@ -7,6 +7,7 @@ fieldset,
 	margin-bottom: 18px;
 	background-color: white;
 	border: none;
+	border-radius: 8px;
 }
 
 label {
@@ -32,6 +33,13 @@ input[type="checkbox"] {
 	margin-right: 6px;
 }
 
+input[type="text"] {
+	width: 192px;
+	border-color: black;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
 /* top row */
 #formcon {
 	display: flex;
@@ -40,6 +48,7 @@ input[type="checkbox"] {
 
 div fieldset {
 	margin-bottom: 0;
+	border-radius: 8px;
 }
 
 /* - thumbnail - */
@@ -201,6 +210,7 @@ h2 {
 	height: 250px;
 	width: 500px;
 	text-align: center;
+	border-radius: 8px;
 }
 
 .delpopup h2 {
@@ -240,6 +250,7 @@ h2 {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	border-radius: 8px;
 }
 
 .thumbnailcon img:nth-of-type(2) {

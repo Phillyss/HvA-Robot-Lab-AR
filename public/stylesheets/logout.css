@@ -8,6 +8,7 @@ section {
 	background-color: white;
 	text-align: center;
 	padding: 42px;
+	border-radius: 8px;
 }
 
 h2 {
@@ -31,6 +32,7 @@ section div {
 a {
 	display: inline-block;
 	line-height: 36px;
+	border-width: 1px;
 }
 
 a:hover {

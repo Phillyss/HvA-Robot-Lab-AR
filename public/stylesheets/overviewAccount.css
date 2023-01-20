@@ -42,6 +42,8 @@ aside .label {
 
 aside input[type="text"] {
 	margin-bottom: 12px;
+	border: 1px solid black;
+	border-radius: 3px;
 }
 
 /* popup container */
