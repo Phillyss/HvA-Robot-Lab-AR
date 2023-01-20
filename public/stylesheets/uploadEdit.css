@@ -73,10 +73,20 @@ div fieldset {
 	text-align: center;
 	font-size: 30px;
 	color: #575757;
+	/* background-image: url("../img/picture.png"); */
+	border: 1px solid black;
+	border-radius: 8px;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
 	transition: 0.3s;
+}
+
+label img {
+	height: 60px;
+	width: auto;
+	position: absolute;
+	top: 22%;
 }
 
 #thumbnailcon label:hover {

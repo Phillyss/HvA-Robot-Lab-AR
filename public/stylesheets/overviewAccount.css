@@ -153,6 +153,13 @@ main section .delpopup p:first-of-type {
 
 /* main */
 
+aside + section h2 {
+	font-size: 36px;
+	color: #575757;
+	position: absolute;
+	top: 180px;
+}
+
 main ul {
 	display: flex;
 	flex-wrap: wrap;

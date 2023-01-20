@@ -208,7 +208,11 @@ router.get("/:id", async (req, res) => {
 					isOwner: isOwner,
 				});
 			} else {
-				res.render("pages/account", { user: user, isOwner: isOwner });
+				res.render("pages/account", {
+					user: user,
+					isOwner: isOwner,
+					noResults: "No Models Found",
+				});
 			}
 		} else {
 			res.redirect("back");

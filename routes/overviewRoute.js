@@ -7,9 +7,14 @@ async function renderOveview(req, res) {
 			.find({})
 			.sort([["modelid", -1]])
 			.limit(9);
+
+		let noResults = "";
+		if (models.length === 0) noResults = "No Models Found";
+
 		res.render("pages/overview", {
 			models: models,
 			userID: req.session.user.id,
+			noResults: noResults,
 		});
 	} catch (err) {
 		console.log(err);

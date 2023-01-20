@@ -122,9 +122,11 @@
 			</aside>
 			<section>
 				<h1><%= locals.user.name %></h1>
+
 				<% if (locals.isOwner) { %>
 				<button type="button" class="buttongrey delete">Delete</button>
 				<% } %>
+				<h2><%- locals.noResults %></h2>
 				<ul>
 					<% if (locals.models) { %> <% locals.models.forEach(model => { %>
 					<li>
