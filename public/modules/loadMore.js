@@ -80,7 +80,7 @@ function getData() {
 				}
 
 				// insert new model cards into the page
-				document.querySelector("h1 + ul").innerHTML += html;
+				document.querySelector("h2 + ul").innerHTML += html;
 
 				// get next model id to start grabbing from db
 				startFrom = document
