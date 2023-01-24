@@ -111,44 +111,50 @@ router.post(
 	]),
 	async (req, res) => {
 		try {
-			// put tags in array
-			const tagsArray = req.body.tags.split(", ");
-			let long = null;
-			let lat = null;
+			let errors = [];
+			errors = validateUploadForm(req, errors);
 
-			// set longitude and latitude if values are provided
-			if (req.body.longitude !== "") long = Number(req.body.longitude);
-			if (req.body.latitude !== "") lat = Number(req.body.latitude);
+			// if form is valid
+			if (errors.length === 0) {
+				// put tags in array
+				const tagsArray = req.body.tags.split(", ");
+				let long = null;
+				let lat = null;
 
-			// get current date
-			const now = new Date();
-			const date = `${now.getDate()} / ${
-				now.getMonth() + 1
-			} / ${now.getFullYear()}`;
+				// set longitude and latitude if values are provided
+				if (req.body.longitude !== "") long = Number(req.body.longitude);
+				if (req.body.latitude !== "") lat = Number(req.body.latitude);
 
-			// set thumbnail file path
-			let thumbnailFilename;
-			const directory = await fs.promises.readdir(
-				`./appFiles/gltfModels/${newModelID}`
-			);
-			thumbnailFilename = directory[1];
+				// get current date
+				const now = new Date();
+				const date = `${now.getDate()} / ${
+					now.getMonth() + 1
+				} / ${now.getFullYear()}`;
 
-			// upload model info to db
-			const newModel = await modelModel.create({
-				modelid: newModelID,
-				userid: req.session.user.id,
-				username: req.session.user.name,
-				date: date,
-				name: req.body.name,
-				thumbnail: thumbnailFilename,
-				description: req.body.description,
-				type: req.body.type,
-				tags: tagsArray,
-				longitude: long,
-				latitude: lat,
-			});
-			const save = await newModel.save();
-			res.redirect(`/models/${newModelID}`);
+				// set thumbnail file path
+				let thumbnailFilename;
+				const directory = await fs.promises.readdir(
+					`./appFiles/gltfModels/${newModelID}`
+				);
+				thumbnailFilename = directory[1];
+
+				// upload model info to db
+				const newModel = await modelModel.create({
+					modelid: newModelID,
+					userid: req.session.user.id,
+					username: req.session.user.name,
+					date: date,
+					name: req.body.name,
+					thumbnail: thumbnailFilename,
+					description: req.body.description,
+					type: req.body.type,
+					tags: tagsArray,
+					longitude: long,
+					latitude: lat,
+				});
+				const save = await newModel.save();
+				res.redirect(`/models/${newModelID}`);
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -295,5 +301,11 @@ router.get("/:id", async (req, res) => {
 		res.redirect("/");
 	}
 });
+
+function validateUploadForm(req, errors) {
+	if (req.body.thumbnail) {
+	}
+	return errors;
+}
 
 module.exports = router;

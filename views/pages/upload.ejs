@@ -40,6 +40,7 @@
 							id="thumbnail"
 						/>
 					</fieldset>
+					<p class="error">Upload a .jpg or .png</p>
 
 					<fieldset>
 						<legend>Information</legend>
@@ -50,10 +51,12 @@
 							>
 							<input type="file" accept=".gltf" name="model" id="model" />
 							<p></p>
+							<p class="error">Upload a .gltf</p>
 						</div>
 						<div>
 							<label for="name">Model Name:</label>
 							<input type="text" name="name" id="name" autocomplete="off" />
+							<p class="error">Name required</p>
 						</div>
 						<div>
 							<label>Tags:</label>
@@ -77,6 +80,7 @@
 								<label for="gps">GPS</label>
 							</div>
 						</div>
+						<p class="error">Example: 3.56743</p>
 						<div id="longcon" class="hidden">
 							<label for="longitude">Longitude:</label>
 							<input type="text" name="longitude" id="longitude" />
@@ -90,12 +94,13 @@
 
 				<fieldset id="descriptionfieldset">
 					<legend>Description</legend>
+					<p class="error">Required</p>
 					<textarea
 						name="description"
 						id="description"
 						cols="40"
 						rows="7"
-						placeholder="A bench made from circular wood for the Green Mile project. The assembly is entirely metal free."
+						placeholder="A bench made of circular wood for the Green Mile project. The assembly process is entirely metal free."
 					></textarea>
 				</fieldset>
 

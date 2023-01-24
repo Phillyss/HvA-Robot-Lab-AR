@@ -1,3 +1,7 @@
+form {
+	position: relative;
+}
+
 fieldset,
 .fset {
 	width: 650px;
@@ -38,6 +42,11 @@ input[type="text"] {
 	border-color: black;
 	border: 1px solid black;
 	border-radius: 3px;
+}
+
+.error {
+	color: #ff2e60;
+	position: absolute;
 }
 
 /* top row */
@@ -100,6 +109,11 @@ label img {
 	text-shadow: 0px 0px 7px #575757;
 }
 
+#thumbnailcon + p {
+	top: 320px;
+	left: 40px;
+}
+
 /* - info inputs - */
 fieldset div,
 .fset div {
@@ -120,6 +134,11 @@ fieldset div div,
 	display: initial;
 	width: 192px;
 	margin-bottom: 0;
+}
+
+#descriptionfieldset p {
+	left: 110px;
+	top: -36px;
 }
 
 legend,
