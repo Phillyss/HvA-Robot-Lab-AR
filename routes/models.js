@@ -69,9 +69,10 @@ const fileFilter = (req, file, cb) => {
 		cb(null, true);
 	} else {
 		cb(
-			new Error(
-				`${file.fieldname} Invalid file type, only PNG, JPG, JPEG and GLTF are allowed`
-			),
+			null,
+			// new Error(
+			// 	`${file.fieldname} Invalid file type, only PNG, JPG, JPEG and GLTF are allowed`
+			// )
 			false
 		);
 	}
