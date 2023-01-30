@@ -58,7 +58,26 @@ const fileStorageEgnine = multer.diskStorage({
 	},
 });
 
-const upload = multer({ storage: fileStorageEgnine });
+const fileFilter = (req, file, cb) => {
+	if (
+		file.mimetype === "image/png" ||
+		file.mimetype === "image/jpeg" ||
+		file.mimetype === "image/jpg" ||
+		(file.mimetype === "application/octet-stream" &&
+			file.originalname.endsWith(".gltf"))
+	) {
+		cb(null, true);
+	} else {
+		cb(
+			new Error(
+				`${file.fieldname} Invalid file type, only PNG, JPG, JPEG and GLTF are allowed`
+			),
+			false
+		);
+	}
+};
+
+const upload = multer({ storage: fileStorageEgnine, fileFilter: fileFilter });
 
 // Edit model: multer
 //let modelsCounter;
@@ -113,6 +132,7 @@ router.post(
 		try {
 			let errors = [];
 			errors = validateUploadForm(req, errors);
+			console.log(req.files);
 
 			// if form is valid
 			if (errors.length === 0) {
@@ -154,12 +174,23 @@ router.post(
 				});
 				const save = await newModel.save();
 				res.redirect(`/models/${newModelID}`);
+			} else {
+				res.render("pages/upload", {
+					name: req.body.name,
+					description: req.body.description,
+				});
 			}
 		} catch (err) {
 			console.log(err);
 		}
 	}
 );
+
+function validateUploadForm(req, errors) {
+	if (req.files.thumbnail) {
+	}
+	return errors;
+}
 
 // edit model page
 router.get("/:id/edit", async (req, res) => {
@@ -301,11 +332,5 @@ router.get("/:id", async (req, res) => {
 		res.redirect("/");
 	}
 });
-
-function validateUploadForm(req, errors) {
-	if (req.body.thumbnail) {
-	}
-	return errors;
-}
 
 module.exports = router;
