@@ -196,10 +196,11 @@ function validateUploadForm(req, errors) {
 // edit model page
 router.get("/:id/edit", async (req, res) => {
 	const model = await modelModel.findOne({ modelid: req.params.id });
+	const user = await userModel.findOne({ id: req.session.user.id });
 
 	// if model exists and user is creator > render edit page
 	if (model) {
-		if (req.session.user.id === model.userid) {
+		if (req.session.user.id === model.userid || user.admin) {
 			// get tags
 			let tagsString = "";
 			for (let i = 0; i < model.tags.length; i++) {
@@ -303,7 +304,8 @@ router.get("/:id", async (req, res) => {
 	}
 
 	const model = await modelModel.findOne({ modelid: req.params.id });
-	let isCreator = false;
+	const user = await userModel.findOne({ id: req.session.user.id });
+	let isCreatorOrAdmin = false;
 	// check if model and user exist
 	if (model) {
 		const creator = await userModel.findOne({ id: model.userid });
@@ -314,9 +316,9 @@ router.get("/:id", async (req, res) => {
 			res.redirect("/");
 		}
 
-		// check if user is creator to render edit button
-		if (model.userid === req.session.user.id) {
-			isCreator = true;
+		// check if user is creator or admin to render edit button
+		if (model.userid === req.session.user.id || user.admin) {
+			isCreatorOrAdmin = true;
 		}
 
 		// generate qrcode
@@ -327,7 +329,7 @@ router.get("/:id", async (req, res) => {
 			model: model,
 			creator: creator,
 			qr: qr,
-			isCreator: isCreator,
+			isCreatorOrAdmin: isCreatorOrAdmin,
 		});
 	} else {
 		res.redirect("/");
