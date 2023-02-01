@@ -33,7 +33,7 @@ const authBlocked = (req, res, next) => {
 
 // /users page
 router.get("/", (req, res) => {
-	res.render("pages/edit.ejs");
+	res.redirect(`/users/${req.session.user.id}`);
 });
 
 // /users/login

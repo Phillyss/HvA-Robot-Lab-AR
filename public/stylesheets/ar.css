@@ -234,6 +234,12 @@ section img {
 	transform: translate(-50%, -50%);
 }
 
+#logo {
+	position: fixed;
+	bottom: 6px;
+	left: 6px;
+}
+
 /* --- Responsiveness --- */
 @media (orientation: landscape) {
 	section img {
