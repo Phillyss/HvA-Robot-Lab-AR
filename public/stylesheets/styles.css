@@ -104,6 +104,12 @@ input[type="checkbox"] {
 	display: none !important;
 }
 
+.disabled {
+	pointer-events: none;
+	color: #575757;
+	opacity: 0.3;
+}
+
 .popup {
 	position: fixed;
 	top: 0;

@@ -8,6 +8,7 @@ const modelModel = require("./schemas/modelSchema");
 const cors = require("cors");
 const fs = require("fs");
 const multer = require("multer");
+const path = require("path");
 require("dotenv").config();
 const formidable = require("express-formidable");
 
@@ -73,6 +74,9 @@ app.get("/", authRequired, (req, res) => overviewRoute(req, res));
 app.use("/users", userRouter);
 app.use("/models", authRequired, modelRouter);
 app.use("/load-more", loadMoreRouter);
+app.get("/manual", (req, res) => {
+	res.sendFile(path.join(__dirname, "./public/img", "manual.pdf"));
+});
 app.get("/deletemodels", async (req, res) => {
 	const modelModel = require("./schemas/modelSchema");
 	const counterModel = require("./schemas/counterSchema");
