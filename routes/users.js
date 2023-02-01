@@ -8,6 +8,7 @@ const authModel = require("../schemas/authSchema");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+//const cookieParser = require("cookie-parser");
 const { fstat } = require("fs");
 
 // middleware to force login on certain pages
@@ -177,6 +178,7 @@ router.get("/logout", authRequired, (req, res) => {
 router.post("/logout", (req, res) => {
 	req.session.destroy(err => {
 		if (err) console.log(err);
+		res.clearCookie("connect.sid");
 		res.redirect("/users/login");
 	});
 });
@@ -252,6 +254,7 @@ router.post("/:id", async (req, res) => {
 			// delete user
 			await user.delete();
 
+			res.clearCookie("connect.sid");
 			res.redirect("/users/login");
 		}
 	} catch (err) {

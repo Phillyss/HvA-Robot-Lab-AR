@@ -191,8 +191,8 @@ pauseButton.addEventListener("click", e => {
 	}
 });
 
-// reset rotation and scale
-resetButton.addEventListener("click", e => {
-	model.setAttribute("rotation", "0 0 0");
-	model.setAttribute("scale", "2 2 2");
-});
+// reset rotation and scale - doesn't work
+// resetButton.addEventListener("click", e => {
+// 	model.setAttribute("rotation", "0 0 0");
+// 	model.setAttribute("scale", "2 2 2");
+// });
