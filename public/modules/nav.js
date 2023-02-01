@@ -1,5 +1,5 @@
 const accountButton = document.querySelector("nav button");
-const svg = document.querySelector("nav svg");
+const svg = document.querySelector("nav button svg");
 const path = document.querySelector("nav path");
 const accountPopup = document.querySelector("nav div");
 let popup = false;
