@@ -6,7 +6,7 @@ async function renderOveview(req, res) {
 		const models = await modelModel
 			.find({})
 			.sort([["modelid", -1]])
-			.limit(9);
+			.limit(12);
 
 		let noResults = "";
 		if (models.length === 0) noResults = "No Models Found";

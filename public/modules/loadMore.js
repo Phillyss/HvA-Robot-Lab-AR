@@ -9,7 +9,7 @@ let nextScroll = 1008;
 ul.addEventListener("scroll", e => {
 	const lastModel = document.querySelector("main ul li:last-of-type");
 	if (isInViewport(lastModel) && ul.scrollHeight >= nextScroll) {
-		nextScroll += 732;
+		nextScroll += 672;
 		getData();
 	}
 });
