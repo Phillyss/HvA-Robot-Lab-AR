@@ -5,6 +5,7 @@ const userModel = require("../schemas/userSchema");
 const modelModel = require("../schemas/modelSchema");
 const counterModel = require("../schemas/counterSchema");
 const authModel = require("../schemas/authSchema");
+const resetModel = require("../schemas/resetSchema");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
@@ -31,7 +32,7 @@ const authBlocked = (req, res, next) => {
 // --- ROUTES ---
 
 // /users page
-router.get("/", (req, res) => {
+router.get("/", authRequired, (req, res) => {
 	res.render("pages/edit.ejs");
 });
 
@@ -85,6 +86,48 @@ router.post("/login", async (req, res) => {
 // /users/signup: signup
 router.get("/signup", authBlocked, (req, res) => {
 	res.render("pages/signup");
+});
+
+// /users/resetpassword: reset password form
+router.get("/resetpassword", authBlocked, (req, res) => {
+	res.render("pages/resetpassword");
+});
+
+// Send reset email
+router.post("/resetpassword", async (req, res) => {
+	try {
+		const email = req.body.email;
+		const requestedUser = await userModel.findOne({ email: email });
+		const resetExists = await resetModel.findOne({ email: email });
+
+		if (requestedUser && !resetExists) {
+			sendResetMail(email);
+		}
+
+		res.render("pages/resetpassword", {
+			email,
+			message:
+				"A mail has been sent to you email if it exists in our database.",
+		});
+	} catch (err) {
+		console.log(err);
+	}
+});
+
+router.get("/resetpassword/:hash", authBlocked, async (req, res) => {
+	try {
+		// check if entered hash exists in db
+		const hash = req.params.hash;
+		const resetRequest = await resetModel.findOne({ hash: hash });
+		if (resetRequest) {
+			// if hash exists render reset form
+			res.render("pages/resetForm", { hash: hash });
+		} else {
+			res.redirect("/users/login");
+		}
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 // upload new user to db
@@ -313,6 +356,47 @@ async function sendAuthMail(newUser) {
 			subject: "Confirm Robot Lab AR Account",
 			html: `Hey ${newUser.name}! <br /> Press the following link to enable your Robot Lab AR account:<br /> 
 			<a href="http://localhost:3000/users/confirm/${hash}">http://localhost:3000/users/confirm/${hash}</a>`,
+		};
+
+		transporter.sendMail(mailData, (err, info) => {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(nodemailer.getTestMessageUrl(info));
+			}
+		});
+	});
+}
+
+// send reset passowrd email
+async function sendResetMail(email) {
+	const hash = crypto.randomBytes(20).toString("hex");
+
+	// store hash in db
+	const newReset = await resetModel.create({
+		hash: hash,
+		email: email,
+	});
+
+	// email setup
+	nodemailer.createTestAccount((err, account) => {
+		let transporter = nodemailer.createTransport({
+			host: "smtp.ethereal.email",
+			port: 587,
+			secure: false,
+			auth: {
+				user: account.user,
+				pass: account.pass,
+			},
+		});
+
+		// mail content: put user hash into url
+		const mailData = {
+			from: account.user,
+			to: email,
+			subject: "Reset Password Robot Lab AR Account",
+			html: `Hello! <br /> A request to reset your Robot Lab AR password has been received. <br />Press the following link to reset your password:<br /> 
+			<a href="http://localhost:3000/users/resetpassword/${hash}">http://localhost:3000/users/resetpassword/${hash}</a>`,
 		};
 
 		transporter.sendMail(mailData, (err, info) => {

@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="/stylesheets/styles.css" />
 		<link rel="stylesheet" href="/stylesheets/loginSignup.css" />
-		<title>Log In</title>
+		<title>Reset Password</title>
 	</head>
 	<body>
 		<main>
@@ -16,24 +16,17 @@
 			<section>
 				<p class="login"><%- locals.error %></p>
 				<div>
-					<form action="/users/login" method="POST">
-						<div>
-							<label for="email">email@hva.nl</label>
-							<input
-								type="text"
-								name="email"
-								id="email"
-								value="<%= locals.email %>"
-							/>
-						</div>
+					<form action="/users/resetpassword/<%= locals.hash %>" method="POST">
 						<div>
 							<label for="password">password</label>
 							<input type="password" name="password" id="password" />
 						</div>
-						<button type="submit" class="buttonblue">Log In</button>
+						<div>
+							<label for="confirm">Confirm Password</label>
+							<input type="confirm" name="confirm" id="confirm" />
+						</div>
+						<button type="submit" class="buttonblue">Change Password</button>
 					</form>
-					<a href="/users/signup">Create Account</a>
-					<a href="/users/resetpassword">Forgot Password</a>
 				</div>
 			</section>
 		</main>
