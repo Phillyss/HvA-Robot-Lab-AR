@@ -114,6 +114,7 @@ router.post("/resetpassword", async (req, res) => {
 	}
 });
 
+// reset password page
 router.get("/resetpassword/:hash", authBlocked, async (req, res) => {
 	try {
 		// check if entered hash exists in db
@@ -125,6 +126,49 @@ router.get("/resetpassword/:hash", authBlocked, async (req, res) => {
 		} else {
 			res.redirect("/users/login");
 		}
+	} catch (err) {
+		console.log(err);
+	}
+});
+
+// reset password
+router.post("/resetpassword/:hash", authBlocked, async (req, res) => {
+	try {
+		// get form data
+		const { password, confirm } = req.body;
+		const hash = req.params.hash;
+
+		let error = "";
+
+		// form validation
+		if (req.body.password.length < 8) {
+			error = "Password is less than 8 characters";
+			res.render("pages/resetForm", { hash, error });
+			return;
+		}
+
+		if (password !== confirm) {
+			error = "Passwords do not match";
+			res.render("pages/resetForm", { hash, error });
+			return;
+		}
+
+		// hash password
+		const hashedPsw = await bcrypt.hash(password, 12);
+
+		// update in db
+		const resetRequest = await resetModel.findOne({ hash: hash });
+		const update = await userModel.updateOne(
+			{ email: resetRequest.email },
+			{ $set: { password: hashedPsw } }
+		);
+		const del = await resetRequest.delete();
+
+		res.render("pages/confirm", {
+			msg: `Succes! <br />
+					<br />
+					Your password has beent updated.`,
+		});
 	} catch (err) {
 		console.log(err);
 	}
@@ -220,6 +264,7 @@ router.get("/logout", authRequired, (req, res) => {
 router.post("/logout", (req, res) => {
 	req.session.destroy(err => {
 		if (err) console.log(err);
+		res.clearCookie("connect.sid");
 		res.redirect("/users/login");
 	});
 });
@@ -295,6 +340,7 @@ router.post("/:id", async (req, res) => {
 			// delete user
 			await user.delete();
 
+			res.clearCookie("connect.sid");
 			res.redirect("/users/login");
 		}
 	} catch (err) {
@@ -312,8 +358,8 @@ function validateSignupForm(req, error) {
 		error = "Passwords do not match";
 	}
 
-	if (req.body.password.length < 6) {
-		error = "Password is less than 6 characters";
+	if (req.body.password.length < 8) {
+		error = "Password is less than 8 characters";
 	}
 
 	if (!req.body.fullname.includes(" ")) {
